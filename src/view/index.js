@@ -1,13 +1,13 @@
-import Inicio from "./inicio.js";
-import Registro from "./registro.js";
-import TimeLine from "./timeLine.js";
-import Editar from "./editar.js";
-import Errores from "./404.js";
+import Initial from './initial.js';
+import NewAccount from './newAccount.js';
+import Post from './post.js';
+import Edit from './edit.js';
+import Errors from './404.js';
 
 export const componentes = {
-    inicio: Inicio,
-    registro: Registro,
-    timeLine: TimeLine,
-    editar: Editar,
-    errores: Errores
-}
+  initial: Initial,
+  newAccount: NewAccount,
+  post: Post,
+  edit: Edit,
+  errors: Errors,
+};
