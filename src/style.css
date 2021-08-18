@@ -3,6 +3,8 @@
     --borderButton:#6CDBD4;
     --phoneFontColor:#525252;
     --desktopFontColor:#686868;
+    --backgroundContainers: #f8f9f0;
+    --inputBackground: #F1F1F1;
     
 }
 html{
@@ -15,4 +17,75 @@ html{
     font-size: 18px;
     width: 252px;
     
+}
+.divLogo{
+    width: 80%;
+    margin:auto;
+    margin-top: 30px;
+    display:flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.imgLogo{
+    background-size: cover;
+    width: 100%;
+    padding: 3px;
+}
+.welcome{
+    font-size: 18px;
+    color: var(--phoneFontColor);
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+.containerLogin{
+
+    margin: auto;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: center;
+    width: 90%;
+    background-color: var(--backgroundContainers);
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+.loginButtons{
+    margin: auto;
+    width: 80%;
+    padding: 5px;
+    margin-top: 20px;
+    background-color: var(--inputBackground);
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;  
+}
+.init{
+    background-color: var(--buttonColor);
+}
+.divNewUser{
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.textInit{
+    margin: auto;
+    color: var(--phoneFontColor);
+}
+.recoverPassword{
+    font-size: 10px;
+}
+.newUser{
+
+    font-size:13px;
+}
+.new{
+    background-color: var(--buttonColor);
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    border-color: 1px solid var(--borderButton);
 }
