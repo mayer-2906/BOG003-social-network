@@ -1,3 +1,4 @@
+//comentario de prueba
 import Inicio from "./inicio.js";
 import Registro from "./registro.js";
 import TimeLine from "./timeLine.js";
