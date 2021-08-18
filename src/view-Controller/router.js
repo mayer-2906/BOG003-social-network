@@ -4,6 +4,9 @@ export const changeView = (route) => {
   const container = document.getElementById('container');
   container.innerHTML = '';
   switch (route) {
+    case './src/index.html': {
+      return container.appendChild(componentes.initial());
+    }
     case '#/initial': {
       return container.appendChild(componentes.initial());
     }
