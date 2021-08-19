@@ -118,7 +118,7 @@ html{
     column-gap: 3px;
     background-color: var(--backgroundContainers);
     border-bottom: 4px solid var(--borderButton);
-    padding:0;
+    padding:5px;
     
 
 }
@@ -127,6 +127,7 @@ html{
     grid-column: 1/2;
     display: flex;
     align-content: flex-end;
+    margin-bottom: -5px;
 }
 
 .imgPost {
@@ -140,8 +141,7 @@ html{
     
     grid-column: 2/3;
     display: flex;
-    align-content: flex-end;
-    margin-bottom: -10px;
+    align-content: flex-end
     
 }
 
@@ -149,8 +149,7 @@ html{
     width: 90%;
     height: 25% ;
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     border-radius: 5px;
     border:1px solid var(--inputBorder);
 }
@@ -158,11 +157,18 @@ html{
 .helloUser {
     grid-column: 3/4;
     display: flex;
+    position: relative;
+       
+}
+
+.textPost{
+    width: 100%;
+    margin: auto;
+    display: flex;
     flex-direction: column;
     align-content: flex-end;
-    padding-top: 10px;
-    position: relative;
-    justify-content: right;  
+    justify-content: right;
+    margin-bottom: -15px;
 }
 
 .hello {
@@ -183,8 +189,38 @@ html{
     text-align: right;
     margin-right: 15px;
     position: relative;
-    margin-top: -15px;
-    padding-top: 0;
-    
-    
+    margin-top: -20px;
+    padding-top: 0;   
+}
+
+.containerMain{
+    width: 98%;
+    margin: auto;
+    margin-top: 20px;
+    padding-bottom: 5px;
+}
+
+.addPost{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipePost{
+    width: 95%;
+    height: 40px;
+    margin: auto;
+    margin-left: 5px;
+    border: 2px solid var(--borderButton);
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--phoneFontColor);
+}
+
+.inputPost{
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 245px;
+    font-size: 15px;
+    font-weight: bold;
 }
