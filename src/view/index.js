@@ -11,3 +11,4 @@ export const componentes = {
   edit: Edit,
   errors: Errors,
 };
+
