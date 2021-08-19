@@ -5,11 +5,14 @@
     --desktopFontColor:#686868;
     --backgroundContainers: #f8f9f0;
     --inputBackground: #F1F1F1;
+    --inputBorder: #e5e5e5;
     
 }
+
 html{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .init{
     background-color: var(--buttonColor);
     border:var(--borderButton);
@@ -18,10 +21,11 @@ html{
     width: 252px;
     
 }
+
 .divLogo{
     width: 80%;
     margin:auto;
-    margin-top: 30px;
+    margin-top: 60px;
     display:flex;
     flex-direction: column;
     align-content: space-between;
@@ -32,6 +36,7 @@ html{
     width: 100%;
     padding: 3px;
 }
+
 .welcome{
     font-size: 18px;
     color: var(--phoneFontColor);
@@ -39,10 +44,11 @@ html{
     margin-top: 20px;
     text-align: center;
 }
+
 .containerLogin{
 
     margin: auto;
-    margin-top: 25px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-content: space-between;
@@ -51,7 +57,9 @@ html{
     background-color: var(--backgroundContainers);
     padding-bottom: 20px;
     padding-top: 10px;
+    border-radius: 10px;
 }
+
 .loginButtons{
     margin: auto;
     width: 80%;
@@ -61,9 +69,11 @@ html{
     border: 1px solid #E5E5E5;
     border-radius: 5px;  
 }
+
 .init{
     background-color: var(--buttonColor);
 }
+
 .divNewUser{
     margin: auto;
     margin-top: 20px;
@@ -71,21 +81,110 @@ html{
     flex-direction: column;
     width: 90%;
 }
+
 .textInit{
     margin: auto;
     color: var(--phoneFontColor);
 }
+
 .recoverPassword{
     font-size: 10px;
 }
-.newUser{
 
+.newUser{
     font-size:13px;
 }
+
 .new{
     background-color: var(--buttonColor);
     color: white;
     font-size: 18px;
     border-radius: 5px;
     border-color: 1px solid var(--borderButton);
+}
+
+.logoInitial {
+    margin-top: 30px;
+}
+
+.containerInitial {
+    margin-top: 25px;
+}
+
+.header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    column-gap: 3px;
+    background-color: var(--backgroundContainers);
+    border-bottom: 4px solid var(--borderButton);
+    padding:0;
+    
+
+}
+
+.logoPost {
+    grid-column: 1/2;
+    display: flex;
+    align-content: flex-end;
+}
+
+.imgPost {
+    width: 100%;
+    background-size: contain;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.searchPost {
+    
+    grid-column: 2/3;
+    display: flex;
+    align-content: flex-end;
+    margin-bottom: -10px;
+    
+}
+
+.searchPost input{
+    width: 90%;
+    height: 25% ;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border:1px solid var(--inputBorder);
+}
+
+.helloUser {
+    grid-column: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    padding-top: 10px;
+    position: relative;
+    justify-content: right;  
+}
+
+.hello {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--phoneFontColor);
+    padding-bottom: 0;
+    text-align: right;
+    margin-right: 15px;
+    position: relative;
+    
+    
+}
+
+.signOut {
+    font-size: 12px;
+    color:var(--phoneFontColor);
+    text-align: right;
+    margin-right: 15px;
+    position: relative;
+    margin-top: -15px;
+    padding-top: 0;
+    
+    
 }
