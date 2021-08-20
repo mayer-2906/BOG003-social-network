@@ -1,226 +1,286 @@
-:root{
-    --buttonColor:#6ACBC5;
-    --borderButton:#6CDBD4;
-    --phoneFontColor:#525252;
-    --desktopFontColor:#686868;
-    --backgroundContainers: #f8f9f0;
-    --inputBackground: #F1F1F1;
-    --inputBorder: #e5e5e5;
-    
+:root {
+  --buttonColor: #6acbc5;
+  --borderButton: #6cdbd4;
+  --phoneFontColor: #525252;
+  --desktopFontColor: #686868;
+  --backgroundContainers: #f8f9f0;
+  --inputBackground: #f1f1f1;
+  --inputBorder: #e5e5e5;
 }
 
-html{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.init{
-    background-color: var(--buttonColor);
-    border:var(--borderButton);
-    border-radius:5px ;
-    font-size: 18px;
-    width: 252px;
-    
+.init {
+  background-color: var(--buttonColor);
+  border: var(--borderButton);
+  border-radius: 5px;
+  font-size: 18px;
+  width: 252px;
 }
 
-.divLogo{
-    width: 80%;
-    margin:auto;
-    margin-top: 60px;
-    display:flex;
-    flex-direction: column;
-    align-content: space-between;
+.divLogo {
+  width: 80%;
+  margin: auto;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 
-.imgLogo{
-    background-size: cover;
-    width: 100%;
-    padding: 3px;
+.imgLogo {
+  background-size: cover;
+  width: 100%;
+  padding: 3px;
 }
 
-.welcome{
-    font-size: 18px;
-    color: var(--phoneFontColor);
-    margin: auto;
-    margin-top: 20px;
-    text-align: center;
+.welcome {
+  font-size: 18px;
+  color: var(--phoneFontColor);
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
 }
 
-.containerLogin{
-
-    margin: auto;
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    justify-content: center;
-    width: 90%;
-    background-color: var(--backgroundContainers);
-    padding-bottom: 20px;
-    padding-top: 10px;
-    border-radius: 10px;
+.containerLogin {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: center;
+  width: 90%;
+  background-color: var(--backgroundContainers);
+  padding-bottom: 10%;
+  padding-top: 5%;
+  border-radius: 10px;
 }
 
-.loginButtons{
-    margin: auto;
-    width: 80%;
-    padding: 5px;
-    margin-top: 20px;
-    background-color: var(--inputBackground);
-    border: 1px solid #E5E5E5;
-    border-radius: 5px;  
+.loginButtons {
+  margin: auto;
+  width: 80%;
+  padding: 5px;
+  margin-top: 20px;
+  background-color: var(--inputBackground);
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
 }
 
-.init{
-    background-color: var(--buttonColor);
+.init {
+  background-color: var(--buttonColor);
 }
 
-.divNewUser{
-    margin: auto;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
+.divNewUser {
+  margin: auto;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
 }
 
-.textInit{
-    margin: auto;
-    color: var(--phoneFontColor);
+.textInit {
+  margin: auto;
+  color: var(--phoneFontColor);
 }
 
-.recoverPassword{
-    font-size: 10px;
+.recoverPassword {
+  margin-top: 2%;
+  font-size: 12px;
 }
 
-.newUser{
-    font-size:13px;
+.newUser {
+  font-size: 13px;
 }
 
-.new{
-    background-color: var(--buttonColor);
-    color: white;
-    font-size: 18px;
-    border-radius: 5px;
-    border-color: 1px solid var(--borderButton);
+.new {
+  background-color: var(--buttonColor);
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  border-color: 1px solid var(--borderButton);
 }
 
 .logoInitial {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .containerInitial {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .header {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 30% 40% 30%;
-    column-gap: 3px;
-    background-color: var(--backgroundContainers);
-    border-bottom: 4px solid var(--borderButton);
-    padding:5px;
-    
-
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  column-gap: 1px;
+  background-color: var(--backgroundContainers);
+  border-bottom: 4px solid var(--borderButton);
 }
 
 .logoPost {
-    grid-column: 1/2;
-    display: flex;
-    align-content: flex-end;
-    margin-bottom: -5px;
+  grid-column: 1/2;
+  display: flex;
+  align-content: flex-end;
 }
 
 .imgPost {
-    width: 100%;
-    background-size: contain;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  width: 100%;
+  background-size: contain;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .searchPost {
-    
-    grid-column: 2/3;
-    display: flex;
-    align-content: flex-end
-    
+  grid-column: 2/3;
+  display: flex;
+  align-content: flex-end;
 }
 
-.searchPost input{
-    width: 90%;
-    height: 25% ;
-    margin: auto;
-    margin-bottom: 2px;
-    border-radius: 5px;
-    border:1px solid var(--inputBorder);
+.searchPost input {
+  width: 100%;
+  height: 25%;
+  margin: auto;
+  margin-bottom: 9px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--inputBorder);
 }
 
 .helloUser {
-    grid-column: 3/4;
-    display: flex;
-    position: relative;
-       
+  grid-column: 3/4;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
 }
 
-.textPost{
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-end;
-    justify-content: right;
-    margin-bottom: -15px;
+.textPost {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  justify-content: right;
+  margin-top: 10px;
 }
 
 .hello {
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--phoneFontColor);
-    padding-bottom: 0;
-    text-align: right;
-    margin-right: 15px;
-    position: relative;
-    
-    
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--phoneFontColor);
+  padding-bottom: 3px;
+  text-align: right;
+  margin-right: 15px;
+  position: relative;
 }
 
 .signOut {
-    font-size: 12px;
-    color:var(--phoneFontColor);
-    text-align: right;
-    margin-right: 15px;
-    position: relative;
-    margin-top: -20px;
-    padding-top: 0;   
+  font-size: 10px;
+  color: var(--phoneFontColor);
+  text-align: right;
+  margin-right: 15px;
+  position: relative;
+  margin-top: -20px;
+  padding-top: 0;
 }
 
-.containerMain{
-    width: 98%;
-    margin: auto;
-    margin-top: 20px;
-    padding-bottom: 5px;
+.containerMain {
+  width: 98%;
+  height: 100%;
+  margin: auto;
+  margin-top: 17%;
 }
 
-.addPost{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+.addPost {
+  position: relative;
+  margin-top: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.recipePost{
-    width: 95%;
-    height: 40px;
-    margin: auto;
-    margin-left: 5px;
-    border: 2px solid var(--borderButton);
-    border-radius: 5px;
-    font-size: 16px;
-    color: var(--phoneFontColor);
+.recipePost {
+  width: 90%;
+  height: 50px;
+  border: 2px solid var(--borderButton);
+  border-radius: 5px;
+  font-size: 14px;
+  color: var(--phoneFontColor);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  resize: none;
 }
 
-.inputPost{
-    width: 100px;
-    margin-top: 10px;
-    margin-left: 245px;
-    font-size: 15px;
-    font-weight: bold;
+.inputPost {
+  width: 27%;
+  margin-top: 10px;
+  margin-left: 63%;
+  font-size: 15px;
+  font-weight: bold;
+}
+.containerPosts {
+  position: relative;
+  top: 20%;
+}
+.userContainerPost {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--backgroundContainers);
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 3%;
+}
+.headerPost {
+  display: grid;
+  grid-template-columns: 45% 37% 15% 0%;
+  align-items: center;
+}
+.postName {
+  font-size: 13px;
+  color: var(--desktopFontColor);
+  margin-left: 11%;
+  font-weight: bold;
+}
+.datePost {
+  font-size: 11px;
+  color: var(--phoneFontColor);
+  margin-left: 2%px;
+}
+.inputEdit {
+  width: 100%;
+  border: none;
+  background-color: var(--backgroundContainers);
+  color: var(--desktopFontColor);
+  outline: none;
+  font-size: 12px;
+}
+.textAreaGray {
+  margin: auto;
+  width: 90%;
+  background-color: var(--inputBackground);
+  justify-content: center;
+  border-radius: 10px;
+  border-color: var(--inputBorder);
+}
+.footerPost {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  width: 100%;
+  justify-content: left;
+}
+.like {
+  width: 15%;
+  margin-left: 10%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.delete {
+  width: 30%;
+  margin-top: 10px;
+  margin-left: 40%;
 }
