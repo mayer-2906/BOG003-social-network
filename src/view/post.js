@@ -1,4 +1,4 @@
-export default () => {
+export const post = () => {
   const viewTimeLine = `
   <header class="header">
     <div class="logoPost">

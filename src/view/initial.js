@@ -1,4 +1,4 @@
-export default () => {
+export const initial = () => {
   const viewInicio = `
   <div class="divLogo logoInitial" id="logo">
       <p class="welcome">Bienvenid@ a</p>
