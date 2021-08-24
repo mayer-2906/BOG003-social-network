@@ -284,3 +284,8 @@
     margin-top: 10px;
     margin-left: 40%;
   }
+
+  #errorMessage{
+    font-size: 25px;
+    color: red;
+  }
