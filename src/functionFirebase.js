@@ -15,7 +15,7 @@ export const register = (email, password) => {
       console.log(errorMessage);
       switch (errorCode) {
         case 'auth/email-already-in-use': {
-          document.getElementById('errorMessage').innerHTML = 'Email ya registrado';
+          document.getElementById('errorMessage').innerHTML = 'Usuario registrado, inicie sesión';
           break;
         }
         case 'auth/weak-password': {
@@ -23,7 +23,7 @@ export const register = (email, password) => {
           break;
         }
         default: {
-          document.getElementById('errorMessage').innerHTML = 'Por favor verifique el correo y contreseña';
+          document.getElementById('errorMessage').innerHTML = 'Por favor verifique el correo y contraseña';
           break;
         }
       }

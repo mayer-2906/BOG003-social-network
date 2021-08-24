@@ -1,16 +1,8 @@
-<<<<<<< HEAD
- :root{
-    --buttonColor:#6ACBC5;
-    --borderButton:#6CDBD4;
-    --phoneFontColor:#525252;
-    --desktopFontColor:#686868;
-=======
 :root {
     --buttonColor: #6acbc5;
     --borderButton: #6cdbd4;
     --phoneFontColor: #525252;
     --desktopFontColor: #686868;
->>>>>>> e1539e3b5328314e078736fbf10a0658e29560f8
     --backgroundContainers: #f8f9f0;
     --inputBackground: #f1f1f1;
     --inputBorder: #e5e5e5;
@@ -296,4 +288,9 @@
   #errorMessage{
     font-size: 25px;
     color: red;
+  }
+
+  .messageRegisteredUser {
+    font-size: 18px;
+    color:var(--phoneFontColor);
   }

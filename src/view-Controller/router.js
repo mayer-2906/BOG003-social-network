@@ -5,26 +5,22 @@ import { edit } from '../view/edit.js';
 import { errors } from '../view/404.js';
 import { register } from '../functionFirebase.js';
 
-// export const isValid = (email, confirmEmail, password, confirmPassword) => {
-//   if (email === confirmEmail && password === confirmPassword) {
-//     return true;
-//   }
-//   return false;
-// };
-
 export const dataRegister = () => {
-  console.log('llamó dataRegister');
   const email = document.getElementById('email').value;
   const confirmEmail = document.getElementById('confirmEmail').value;
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
   console.log(email +''+ confirmEmail);
   console.log(password + '' + confirmPassword);
-  if (email === confirmEmail && password === confirmPassword) {
-    register(email, password);
+  if (email.length !== 0 && confirmEmail.length !== 0 && password.length !== 0 && confirmPassword.length !== 0) {
+    if (email === confirmEmail && password === confirmPassword) {
+      register(email, password);
+    } else {
+      alert('verifique');
+      document.getElementById('errorMessage').innerHTML = 'Verifique el correo y contraseña';
+    }
   } else {
-    alert('verifique');
-    document.getElementById('errorMessage').innerHTML = 'Verifique el correo y contraseña';
+    document.getElementById('errorMessage').innerHTML = 'Debe llenar todos los campos';
   }
 };
 
@@ -43,14 +39,6 @@ export const changeView = (route) => {
       const inputLogin = document.getElementById('signIn');
       inputLogin.addEventListener('click', () => {
         dataRegister();
-        // const valid = dataRegister();
-        // if (valid) {
-        //   console.log('entre a valid: '+ valid);
-        //   // document.getElementById('singIn').removeAttribute('onclick');
-        //   document
-        //     .getElementById('singIn')
-        //     .setAttribute('onclick', "location.href='#/initial");
-        // }
       });
       return container;
     }
