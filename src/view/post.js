@@ -16,7 +16,7 @@ export const post = () => {
   </header>
   <main class="containerMain">
     <div class="addPost">
-      <input class="recipePost" type="text" placeholder="¿Qué receta quieres compartir hoy?">
+      <textarea name="Receta" class="recipePost" type="text" placeholder="¿Qué receta quieres compartir hoy?"></textarea>
       <input class="init inputPost" type="button" onclick="location.href='#/post';" value="Publicar"/>
     </div>
     <div class="containerPosts">
@@ -26,25 +26,27 @@ export const post = () => {
           <p class="datePost">Fecha y Hora</p>
           <input class="inputEdit" type="button" onclick="location.href='#/edit';" value="Editar"/>
         </div>
+         <textarea class=textAreaGray cols="10" rows="5" disabled></textarea>
         <div class="recipe">
         </div>
         <div class="footerPost">
-          <img src="./images/Captura de pantalla 2021-08-19 122244.png" alt="">
-          <img src="./images/basura.png" alt="">
+          <img class="like" src="./images/like.png" alt="">
+          <img class="delete" src="./images/delete.png" alt="">
         </div>
         </div>
-        <div class="otherUserContainerPost">
-          <div class="headerPost">
-            <p class="postName">Nombre Usuario</p>
-            <p class="datePost">Fecha y Hora</p>
-          </div>
+        </div>
+        <div class="containerPosts">
+      <div class="userContainerPost">
+        <div class="headerPost">
+          <p class="postName">Nombre Usuario</p>
+          <p class="datePost">Fecha y Hora</p>
+        </div>
+         <textarea class=textAreaGray cols="10" rows="5" disabled></textarea>
         <div class="recipe">
         </div>
         <div class="footerPost">
-          <img src="./images/Captura de pantalla 2021-08-19 122244.png" alt="">
+          <img class="like" src="./images/like.png" alt="">
         </div>
-      </div>
-    </div>
   </main>
   `;
   const divElement = document.createElement('div');
