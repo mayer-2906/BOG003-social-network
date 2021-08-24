@@ -19,7 +19,7 @@ export const newAccount = () => {
     <input id="confirmEmail" class="loginButtons" type="email" placeholder="Confirmar correo electrónico"/>
     <input id="password" class="loginButtons" type="password" placeholder="Contraseña"/>
     <input id="confirmPassword" class="loginButtons" type="password" placeholder="Confirmar contraseña"/>
-    <input id="signIn"class="loginButtons init" type="button" onclick="dataRegister" value="Registrarse"/>
+    <input id="signIn"class="loginButtons init" type="button"  value="Registrarse"/>
     <div id='errorMessage'></div>
   </div> `;
   const divElement = document.createElement('div');
