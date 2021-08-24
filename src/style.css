@@ -289,3 +289,8 @@
     font-size: 25px;
     color: red;
   }
+
+  .messageRegisteredUser {
+    font-size: 18px;
+    color:var(--phoneFontColor);
+  }
