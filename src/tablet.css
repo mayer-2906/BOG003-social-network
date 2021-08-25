@@ -1,0 +1,25 @@
+.divNewUser{
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+.addPost{
+  margin-top: 15%;
+}
+.like{
+  width: 10%;
+}
+.delete{
+  width: 25%;
+}
+.hello{
+  font-size: 15px;
+}
+.loginButtons{
+  font-size: 18px;
+}
+.recipePost{
+  height: 80px;
+}
+.googleLogo{
+  width: 18px;
+}
