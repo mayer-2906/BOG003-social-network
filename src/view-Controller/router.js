@@ -3,7 +3,7 @@ import { newAccount } from '../view/newAccount.js';
 import { post } from '../view/post.js';
 import { edit } from '../view/edit.js';
 import { errors } from '../view/404.js';
-import { register, signIn } from '../functionFirebase.js';
+import { register, signIn, logInWithGoogle } from '../functionFirebase.js';
 
 export const dataRegister = () => {
   const email = document.getElementById('email').value;
@@ -27,10 +27,7 @@ const userLogIn = () => {
   const password = document.getElementById('logInPassword').value;
   if (email.length !== 0 && password.length !== 0) {
     signIn(email, password);
-    // window.location.href = '#/post';
   } else {
-    window.location.href = '#/initial';
-    alert('Verfique');
     document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
   }
 };
@@ -47,6 +44,11 @@ export const changeView = (route) => {
       const buttonLogIn = document.getElementById('logInBtn');
       buttonLogIn.addEventListener('click', () => {
         userLogIn();
+      });
+      const buttonGoogle = document.getElementById('logInGoogle');
+      buttonGoogle.addEventListener('click', e => {
+        console.log('entra');
+        logInWithGoogle();
       });
       return container;
     }
