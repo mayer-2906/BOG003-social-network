@@ -3,7 +3,7 @@ import { newAccount } from '../view/newAccount.js';
 import { post } from '../view/post.js';
 import { edit } from '../view/edit.js';
 import { errors } from '../view/404.js';
-import { register } from '../functionFirebase.js';
+import { register, signIn } from '../functionFirebase.js';
 
 export const dataRegister = () => {
   const email = document.getElementById('email').value;
@@ -16,11 +16,22 @@ export const dataRegister = () => {
     if (email === confirmEmail && password === confirmPassword) {
       register(email, password);
     } else {
-      alert('verifique');
-      document.getElementById('errorMessage').innerHTML = 'Verifique el correo y contraseña';
+      document.getElementById('errorMessage').innerHTML = '⚠ Verifique el correo y contraseña';
     }
   } else {
-    document.getElementById('errorMessage').innerHTML = 'Debe llenar todos los campos';
+    document.getElementById('errorMessage').innerHTML = '❌ Debe llenar todos los campos';
+  }
+};
+const userLogIn = () => {
+  const email = document.getElementById('logInEmail').value;
+  const password = document.getElementById('logInPassword').value;
+  if (email.length !== 0 && password.length !== 0) {
+    signIn(email, password);
+    // window.location.href = '#/post';
+  } else {
+    window.location.href = '#/initial';
+    alert('Verfique');
+    document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
   }
 };
 
@@ -32,7 +43,12 @@ export const changeView = (route) => {
       return container.appendChild(initial());
     }
     case '#/initial': {
-      return container.appendChild(initial());
+      container.appendChild(initial());
+      const buttonLogIn = document.getElementById('logInBtn');
+      buttonLogIn.addEventListener('click', () => {
+        userLogIn();
+      });
+      return container;
     }
     case '#/newAccount': {
       container.appendChild(newAccount());

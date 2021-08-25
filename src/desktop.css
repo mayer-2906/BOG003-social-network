@@ -1,0 +1,90 @@
+body {
+  border: var(--buttonDesktopColor) solid 4px;
+  border-radius: 10px;
+  margin: 2%;
+  
+}
+/* .container{
+  display: grid;
+  grid-template-columns: [x0] 50% [x1] 50% [x2];
+  grid-template-rows: [y0] 50% [y1] 50% [y2]; 
+} */
+.divLogo {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-left: 7%;
+  margin-top: 20%;
+  margin-bottom: 37%;
+  margin-right: 0px;
+  grid-row: y0/y2;
+  
+}
+.divLogo::after{
+  content: "Delicious te ayuda a compartir y encontrar recetas de todos los tipos, ¿qué esperas para unirte?";
+  font-size: 27px;
+  text-align: center;
+  margin-top: 10%;
+  
+}
+.welcome {
+  font-size: 37px;
+}
+
+.imgLogo {
+  width: 90%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+.containerInitial{
+  margin-top: 30%;
+}
+.init{
+font-weight: bold;
+    color: var(--desktopFontColor);
+    background-color: var(--buttonDesktopColor);
+  }
+.loginButtons{
+  font-size: 30px;
+  margin-top: 4%;
+  color: var(--desktopFontColor);
+  height: 45%;
+  border-radius: 5px;
+  font-size: 25px;
+  
+}
+.containerLogin{
+  width: 90%;
+  grid-column: x1/x2;
+  grid-row: y0/y2;
+}
+
+.divNewUser{
+  grid-column: x1/x2;
+  grid-row: y1/y2;
+  display: flex;
+  flex-direction: column;
+  margin-top:35%
+  
+  
+}
+.textInit{
+  margin: auto;
+  font-size: 27px;
+  margin-bottom: 2%;
+  text-align: center;
+}
+.new{
+  margin-top: 0px;
+  color: white;
+  background-color: #6ACBC5;
+  width: 73%;
+  height: 60%;
+}
+.newUser{
+  font-size: 20px;
+  margin-top: 5%;
+}
+.recoverPassword{
+  font-size: 20px;
+}

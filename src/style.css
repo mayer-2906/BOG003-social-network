@@ -1,5 +1,6 @@
 :root {
-    --buttonColor: #6acbc5;
+    --buttonPhoneColor: #6acbc5;
+    --buttonDesktopColor:#6CDBD4;
     --borderButton: #6cdbd4;
     --phoneFontColor: #525252;
     --desktopFontColor: #686868;
@@ -14,7 +15,7 @@
   }
   
   .init {
-    background-color: var(--buttonColor);
+    background-color: var(--buttonPhoneColor);
     border: var(--borderButton);
     border-radius: 5px;
     font-size: 18px;
@@ -65,10 +66,18 @@
     background-color: var(--inputBackground);
     border: 1px solid #e5e5e5;
     border-radius: 5px;
+    font-size: 17px;
+  }
+  
+  .googleLogo{
+    position:relative;
+    width: 16px;
+    margin-left: -3%;
+
   }
   
   .init {
-    background-color: var(--buttonColor);
+    background-color: var(--buttonPhoneColor);
   }
   
   .divNewUser {
@@ -94,7 +103,7 @@
   }
   
   .new {
-    background-color: var(--buttonColor);
+    background-color: var(--buttonPhoneColor);
     color: white;
     font-size: 18px;
     border-radius: 5px;
@@ -286,8 +295,10 @@
   }
 
   #errorMessage{
-    font-size: 25px;
+    font-size: 13px;
     color: red;
+    margin: auto;
+    text-align: center;
   }
 
   .messageRegisteredUser {
