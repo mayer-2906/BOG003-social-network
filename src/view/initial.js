@@ -8,7 +8,7 @@ export const initial = () => {
       <div id="messageRegisteredUser"></div>
       <input class="loginButtons" id="logInEmail" type="email" placeholder="Correo electrónico" required/>
       <input class="loginButtons" id="logInPassword" type="password" placeholder="Contraseña" required/>
-      <input class="loginButtons init" id="logInBtn" type="button" onclick="location.href='#/post';" value="Iniciar sesión"/>
+      <input class="loginButtons init" id="logInBtn" type="button" value="Iniciar sesión"/>
       <p class="recoverPassword textInit">¿Olvidaste tu contraseña?</p>
       <button class="loginButtons init"  onclick="location.href='#/post';">
       <img class="googleLogo" src="./images/google.png"/>

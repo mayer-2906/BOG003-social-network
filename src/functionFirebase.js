@@ -1,8 +1,10 @@
 export const register = (email, password) => {
+  /* eslint-disable */
   console.log('llamo a register');
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
+      /* eslint-disable */
       var user = userCredential.user;
       console.log(user.email);
       window.location.href = '#/initial';
@@ -39,7 +41,6 @@ export const signIn = (email, password) => {
       // ...
     })
     .catch((error) => {
-      window.location.href = '#/initial';
       var errorCode = error.code;
       console.log(errorCode);
       var errorMessage = error.message;
