@@ -46,8 +46,7 @@ export const changeView = (route) => {
         userLogIn();
       });
       const buttonGoogle = document.getElementById('logInGoogle');
-      buttonGoogle.addEventListener('click', e => {
-        console.log('entra');
+      buttonGoogle.addEventListener('click', () => {
         logInWithGoogle();
       });
       return container;
