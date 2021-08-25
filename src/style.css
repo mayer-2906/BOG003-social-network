@@ -14,6 +14,11 @@
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
   
+  .divInitial{
+    max-height: 100vh;
+    max-width: 100vw;
+  }
+
   .init {
     background-color: var(--buttonPhoneColor);
     border: var(--borderButton);

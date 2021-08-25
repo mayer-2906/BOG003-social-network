@@ -20,6 +20,7 @@ export const initial = () => {
       <input class="new loginButtons" type="button" onclick="location.href='#/newAccount';" value="Crear nueva cuenta"/>
   </div>`;
   const divElement = document.createElement('div');
+  divElement.classList.add('divInitial');
   divElement.innerHTML = viewInicio;
   return divElement;
 };
