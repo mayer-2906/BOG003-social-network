@@ -10,6 +10,7 @@ export const dataRegister = () => {
   const confirmEmail = document.getElementById('confirmEmail').value;
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
+  /* eslint-disable */
   console.log(email +''+ confirmEmail);
   console.log(password + '' + confirmPassword);
   if (email.length !== 0 && confirmEmail.length !== 0 && password.length !== 0 && confirmPassword.length !== 0) {

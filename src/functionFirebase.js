@@ -1,14 +1,17 @@
 export const register = (email, password) => {
+  /* eslint-disable */
   console.log('llamo a register');
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
+      /* eslint-disable */
       var user = userCredential.user;
       console.log(user.email);
       window.location.href = '#/initial';
       // ...
     })
     .catch((error) => {
+      /* eslint-disable */
       var errorCode = error.code;
       console.log(errorCode);
       var errorMessage = error.message;
@@ -33,6 +36,7 @@ export const register = (email, password) => {
 export const signIn = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
+      /* eslint-disable */
       var user = userCredential.user;
       console.log(user.email);
       window.location.href = '#/post';
@@ -73,6 +77,7 @@ export const signIn = (email, password) => {
 //     });
 // };
 export const logInWithGoogle = () => {
+  /* eslint-disable */
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
   .signInWithPopup(provider)

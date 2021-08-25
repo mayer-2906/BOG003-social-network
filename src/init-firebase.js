@@ -1,5 +1,5 @@
 // Your web app's Firebase configuration
-
+/* eslint-disable */
 var firebaseConfig = {
   apiKey: "AIzaSyBzTRgE-9Bh8FErBktWLlw8OMjj3Bw2M4I",
   authDomain: "sn2-bog003.firebaseapp.com",
