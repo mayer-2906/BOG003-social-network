@@ -1,9 +1,3 @@
-.divInitial{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  
-}
-
 .logoInitial{
   grid-column: 1/2;
   grid-row: 1/3;
@@ -13,14 +7,11 @@
 
 .containerLogin{
   margin-top: 20px;
-  grid-column: 2/3;
 }
 
 .divNewUser{
   margin-top: 5%;
   margin-bottom: 10%;
-  grid-column: 2/3;
-  grid-row: 2/3;
 }
 .addPost{
   margin-top: 15%;
