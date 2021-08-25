@@ -11,6 +11,7 @@ export const newAccount = () => {
       <input id="confirmPassword" class="loginButtons" type="password" placeholder="Confirmar contraseña"/>
       <input id="signIn"class="loginButtons init" type="button"  value="Registrarse"/>
       <div id='errorMessage'></div>
+      <p id="backToInitial" class="backToInitial" onclick="location.href='#/initial'">Iniciar Sesión</p>
     </div> 
   `;
   const divElement = document.createElement('div');
