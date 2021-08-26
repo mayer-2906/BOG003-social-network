@@ -2,52 +2,55 @@ body {
   border: var(--buttonDesktopColor) solid 4px;
   border-radius: 10px;
   margin: 2%;
-  
+  min-height: 100vh;
 }
-
+.container{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+}
 .divInitial{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  
+  grid-template-rows: 1fr;
 }
-/* .container{
-  display: grid;
-  grid-template-columns: [x0] 50% [x1] 50% [x2];
-  grid-template-rows: [y0] 50% [y1] 50% [y2]; 
-} */
-
 
 .divLogo {
   margin: auto;
   display: flex;
   flex-direction: column;
-  margin-left: 7%;
-  margin-top: 20%;
-  margin-bottom: 37%;
+  margin-left: 9%;
+  margin-top: 25%;
+  margin-bottom: 25%;
   margin-right: 0px;
   grid-column: 1/2;
-  grid-row: 1/3;
-  
 }
-.divLogo::after{
-  content: "Delicious te ayuda a compartir y encontrar recetas de todos los tipos, ¿qué esperas para unirte?";
+.description{
+  display: block;
+  position: relative;
   font-size: 27px;
   text-align: center;
   margin-top: 10%;
-  
+  color: var(--desktopFontColor);  
 }
 .welcome {
   font-size: 37px;
+  color: var(--desktopFontColor);
+  margin-bottom: 5%;
 }
 
 .imgLogo {
   width: 90%;
   margin-top: 5%;
   margin-bottom: 2%;
+  margin-left: auto;
+}
+.desktopContainer{
+  grid-column: 2/3;
 }
 .containerInitial{
   margin-top: 30%;
-  grid-column: 2/3;
 }
 .init{
 font-weight: bold;
@@ -65,16 +68,14 @@ font-weight: bold;
 }
 .containerLogin{
   width: 90%;
+  margin-right: 10%;
 }
 
 .divNewUser{
-  grid-column: 2/3;
-  grid-row: 2/3;
   display: flex;
   flex-direction: column;
-  margin-top:35%
-  
-  
+  margin-top: 10%;
+  margin-right: 10%;
 }
 .textInit{
   margin: auto;
@@ -84,15 +85,96 @@ font-weight: bold;
 }
 .new{
   margin-top: 0px;
-  color: white;
-  background-color: #6ACBC5;
-  width: 73%;
-  height: 60%;
+  color:white;
+  background-color:var(--colorLogo);
+  width: 65%;
+  height: 75%;
+  border-color: var(--colorLogo);
+  font-weight: bold;
+  font-size: 22px;
 }
 .newUser{
   font-size: 20px;
-  margin-top: 5%;
 }
 .recoverPassword{
   font-size: 20px;
+}
+/* Register page */
+.logoRegister{
+  margin: auto;
+  margin-left: 13%;
+  margin-top: 25%
+}
+.containerLoginRegister{
+  margin: auto;
+}
+/* Post */
+.headerDesktop{
+  gap: 5px;
+  grid-template-columns: 35% 45% 20%;
+  width: 100%;
+}
+.helloDesktop{
+  font-size: 25px;
+}
+.signOutDesktop{
+  font-size: 20px;
+}
+.searchPostDesktop input{
+  margin-bottom: 5%;
+  border-radius: 10px;
+}
+
+.recipePostDesktop{
+  margin: auto;
+  width: 100%; 
+  font-size: 23px;
+  height: 120px;
+  border: 4px solid var(--borderButton);
+  border-radius: 10px;
+}
+.containerMain{
+  margin-top: 15%;
+  width: 100%;
+}
+.userContainerPost{
+  border-radius: 15px;
+}
+.searchInput{
+  font-size: 17px;
+  background-image: url("./images/loupe.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-size: 35px;
+  background-position-y: center;
+}
+.addPostDesktop{
+  width: 95%;
+  margin: auto;
+}
+.textAreaGray{
+  height: 120px;
+}
+.inputPostDesktop{
+  font-size: 24px;
+}
+.postNameDesktop{
+  font-size: 20px;
+}
+.containerPosts{
+  margin: auto;
+  width: 95%;
+}
+.datePostDesktop{
+  font-size: 20px;
+}
+.inputEditDesktop{
+  font-size: 20px;
+}
+.like{
+  width: 5%;
+}
+.delete{
+  margin-top: 6%;
+  width: 10%;
 }
