@@ -51,31 +51,6 @@ export const signIn = (email, password) => {
     });
 };
 
-// export const logInWithGoogle = () => {
-//   var provider = new firebase.auth.GoogleAuthProvider();
-//   firebase.auth().signInWithRedirect(provider);
-//   firebase.auth()
-//     .getRedirectResult()
-//     .then((result) => {
-//       if (result.credential) {
-//         var credential = result.credential;
-//         var token = credential.accessToken;
-//       }
-//       var user = result.user;
-//       window.location.href = '#/post';
-//     })
-//     .catch((error) => {
-//       window.location.href = '#/initial';
-//       var errorCode = error.code;
-//       console.log(errorCode);
-//       var errorMessage = error.message;
-//       console.log(errorMessage);
-//     //  The email of the user's account used.
-//       var email = error.email;
-//     //  The firebase.auth.AuthCredential type that was used.
-//       var credential = error.credential;  
-//     });
-// };
 export const logInWithGoogle = () => {
   /* eslint-disable */
   var provider = new firebase.auth.GoogleAuthProvider();
