@@ -10,7 +10,7 @@ export const initial = () => {
       <input class="loginButtons" id="logInPassword" type="password" placeholder="Contraseña" required/>
       <input class="loginButtons init" id="logInBtn" type="button" value="Iniciar sesión"/>
       <p class="recoverPassword textInit">¿Olvidaste tu contraseña?</p>
-      <button class="loginButtons init"  onclick="location.href='#/post';">
+      <button class="loginButtons init" id="logInGoogle">
       <img class="googleLogo" src="./images/google.png"/>
       Iniciar sesión con Google
       </button>   
