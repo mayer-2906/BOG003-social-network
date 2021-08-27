@@ -10,7 +10,7 @@ export const post = () => {
     <div class="helloUser">
       <div class="textPost">
         <p class="hello helloDesktop" >Hola Usuario</p>
-        <p class="signOut signOutDesktop">Cerrar sesión</p>
+        <p id='signOut' class="signOut signOutDesktop">Cerrar sesión</p>
       </div>
     </div>
   </header>

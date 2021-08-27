@@ -45,11 +45,31 @@ export const signIn = (email, password) => {
     .catch((error) => {
       window.location.href = '#/initial';
       var errorCode = error.code;
-      console.log(errorCode);
-      var errorMessage = error.message;
-      console.log(errorMessage);
-    });
-};
+      switch (errorCode) {
+        case 'auth/invalid-email': {
+          document.getElementById('messageRegisteredUser').innerHTML = '❌ Correo inválido';
+          break;
+        }
+        case 'auth/wrong-password': {
+          document.getElementById('messageRegisteredUser').innerHTML = '❌ Contraseña incorrecta';
+          break;
+        }
+        case 'auth/too-many-requests': {
+          document.getElementById('messageRegisteredUser').innerHTML = '⚠ Superó los intentos válidos para ingresar';
+          break;
+        }
+        
+        case 'auth/user-not-found': {
+          document.getElementById('messageRegisteredUser').innerHTML = '❌ Usuario no registrado';
+          break;
+        }
+        default: {
+          document.getElementById('messageRegisteredUser').innerHTML = '❌ Error inesperado, intente de nuevo';
+          break;
+        }
+        
+    };
+});}
 
 export const logInWithGoogle = () => {
   /* eslint-disable */
@@ -65,7 +85,6 @@ export const logInWithGoogle = () => {
     // The signed-in user info.
     var user = result.user;
     window.location.href = '#/post';
-    // ...
   }).catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
@@ -74,6 +93,14 @@ export const logInWithGoogle = () => {
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
-    // ...
   });
 };
+// SignOut
+ export const signOutDelicious = () => {
+firebase.auth().signOut().then(() => {
+  console.log('sign out');
+  window.location.href = '#/initial';
+}).catch((error) => {
+  console.log('sign out');
+});
+}
