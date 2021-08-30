@@ -3,7 +3,7 @@ import { newAccount } from '../view/newAccount.js';
 import { post } from '../view/post.js';
 import { edit } from '../view/edit.js';
 import { errors } from '../view/404.js';
-import { register, signIn, logInWithGoogle } from '../functionFirebase.js';
+import { register, signIn, logInWithGoogle, signOutDelicious } from '../functionFirebase.js';
 
 export const dataRegister = () => {
   const email = document.getElementById('email').value;
@@ -27,7 +27,7 @@ const userLogIn = () => {
   const email = document.getElementById('logInEmail').value;
   const password = document.getElementById('logInPassword').value;
   if (email.length !== 0 && password.length !== 0) {
-    signIn(email, password);
+    signIn(email, password);  
   } else {
     document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
   }
@@ -61,7 +61,12 @@ export const changeView = (route) => {
       return container;
     }
     case '#/post': {
-      return container.appendChild(post());
+      container.appendChild(post());
+      const buttonSignOut = document.getElementById('signOut');
+      buttonSignOut.addEventListener('click', () => {
+        signOutDelicious();
+      });
+      return container;
     }
     case '#/edit': {
       return container.appendChild(edit());
@@ -69,5 +74,5 @@ export const changeView = (route) => {
     default: {
       return container.appendChild(errors());
     }
-  }
+}
 };
