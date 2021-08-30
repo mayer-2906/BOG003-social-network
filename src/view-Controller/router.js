@@ -27,7 +27,7 @@ const userLogIn = () => {
   const email = document.getElementById('logInEmail').value;
   const password = document.getElementById('logInPassword').value;
   if (email.length !== 0 && password.length !== 0) {
-    signIn(email, password);
+    signIn(email, password);  
   } else {
     document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
   }
