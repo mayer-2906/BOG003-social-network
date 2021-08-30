@@ -22,8 +22,12 @@ export const initial = () => {
       <input class="new loginButtons" type="button" onclick="location.href='#/newAccount';" value="Crear nueva cuenta"/>
   </div>
   </div>`;
+  const viewInicioScript = `
+  <script src="./indexView/indexInitial.js" type="module"></script>
+  `;
   const divElement = document.createElement('div');
   divElement.classList.add('divInitial');
   divElement.innerHTML = viewInicio;
+  document.getElementById('container').insertAdjacentHTML('afterend', viewInicioScript);
   return divElement;
 };

@@ -3,7 +3,7 @@ import { newAccount } from '../view/newAccount.js';
 import { post } from '../view/post.js';
 import { edit } from '../view/edit.js';
 import { errors } from '../view/404.js';
-import { register, signIn, logInWithGoogle, signOutDelicious } from '../functionFirebase.js';
+import { register, signOutDelicious } from '../functionFirebase.js';
 
 export const dataRegister = () => {
   const email = document.getElementById('email').value;
@@ -23,15 +23,6 @@ export const dataRegister = () => {
     document.getElementById('errorMessage').innerHTML = '❌ Debe llenar todos los campos';
   }
 };
-const userLogIn = () => {
-  const email = document.getElementById('logInEmail').value;
-  const password = document.getElementById('logInPassword').value;
-  if (email.length !== 0 && password.length !== 0) {
-    signIn(email, password);  
-  } else {
-    document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
-  }
-};
 
 export const changeView = (route) => {
   const container = document.getElementById('container');
@@ -41,16 +32,7 @@ export const changeView = (route) => {
       return container.appendChild(initial());
     }
     case '#/initial': {
-      container.appendChild(initial());
-      const buttonLogIn = document.getElementById('logInBtn');
-      buttonLogIn.addEventListener('click', () => {
-        userLogIn();
-      });
-      const buttonGoogle = document.getElementById('logInGoogle');
-      buttonGoogle.addEventListener('click', () => {
-        logInWithGoogle();
-      });
-      return container;
+      return container.appendChild(initial());     
     }
     case '#/newAccount': {
       container.appendChild(newAccount());

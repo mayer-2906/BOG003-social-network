@@ -34,41 +34,8 @@ export const register = (email, password) => {
     });
 };
 export const signIn = (email, password) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      /* eslint-disable */
-      var user = userCredential.user;
-      console.log(user.email);
-      window.location.href = '#/post';
-      // ...
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      switch (errorCode) {
-        case 'auth/invalid-email': {
-          document.getElementById('messageRegisteredUser').innerHTML = '❌ Correo inválido';
-          break;
-        }
-        case 'auth/wrong-password': {
-          document.getElementById('messageRegisteredUser').innerHTML = '❌ Contraseña incorrecta';
-          break;
-        }
-        case 'auth/too-many-requests': {
-          document.getElementById('messageRegisteredUser').innerHTML = '⚠ Superó los intentos válidos para ingresar';
-          break;
-        }
-        
-        case 'auth/user-not-found': {
-          document.getElementById('messageRegisteredUser').innerHTML = '❌ Usuario no registrado';
-          break;
-        }
-        default: {
-          document.getElementById('messageRegisteredUser').innerHTML = '❌ Error inesperado, intente de nuevo';
-          break;
-        }
-        
-    };
-});}
+  return firebase.auth().signInWithEmailAndPassword(email, password)    
+}
 
 export const logInWithGoogle = () => {
   /* eslint-disable */
