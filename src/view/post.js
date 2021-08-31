@@ -10,7 +10,7 @@ export const post = () => {
     <div class="helloUser">
       <div class="textPost">
         <p class="hello helloDesktop" >Hola Usuario</p>
-        <p id='signOut' class="signOut signOutDesktop">Cerrar sesión</p>
+        <p id='signOut' class="signOut signOutDesktop" onclick="location.href='#/initial'">Cerrar sesión</p>
       </div>
     </div>
   </header>
@@ -51,5 +51,6 @@ export const post = () => {
   `;
   const divElement = document.createElement('div');
   divElement.innerHTML = viewTimeLine;
+  document.getElementById('scriptView').src = './indexView/indexPost.js';
   return divElement;
 };

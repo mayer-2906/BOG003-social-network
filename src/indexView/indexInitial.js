@@ -1,6 +1,6 @@
-import { signIn } from '../functionFirebase.js';
+import { signIn, logInWithGoogle } from '../functionFirebase.js';
 
-window.addEventListener('Load', () => {
+document.addEventListener('DOMContentLoaded', () => {
 /* eslint-disable */
     console.log('estoy en el indexInitial');
 });
@@ -10,23 +10,42 @@ buttonLogIn.addEventListener('click', () => {
   userLogIn();
 });
 
-const userLogIn = () => {
+const userLogIn = async () => {
   const email = document.getElementById('logInEmail').value;
   const password = document.getElementById('logInPassword').value;
   if (email.length !== 0 && password.length !== 0) {
-    signInIndex(email, password);  
+    await signInIndex(email, password);  
   } else {
+    console.log('error de registro')
     document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
   }
 };
 
 const buttonGoogle = document.getElementById('logInGoogle');
 buttonGoogle.addEventListener('click', () => {
-  logInWithGoogle();
+  logInWithGoogle()
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+    // This gives you a Google Access Token. You 
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    window.location.href = '#/post';
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    console.log(errorCode)
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that
+    var credential = error.credential;
+  });
 });
 
-export const signInIndex = async (email,password) =>{
-  await signIn(email,password)
+export const signInIndex = (email,password) =>{
+  signIn(email,password)
   .then((userCredential) => {
     /* eslint-disable */
     var user = userCredential.user;
@@ -36,6 +55,7 @@ export const signInIndex = async (email,password) =>{
   })
   .catch((error) => {
     var errorCode = error.code;
+    console.log('Este es el error de firebase', errorCode)
     switch (errorCode) {
       case 'auth/invalid-email': {
         document.getElementById('messageRegisteredUser').innerHTML = '❌ Correo inválido';

@@ -43,12 +43,7 @@ export const changeView = (route) => {
       return container;
     }
     case '#/post': {
-      container.appendChild(post());
-      const buttonSignOut = document.getElementById('signOut');
-      buttonSignOut.addEventListener('click', () => {
-        signOutDelicious();
-      });
-      return container;
+      return container.appendChild(post());
     }
     case '#/edit': {
       return container.appendChild(edit());

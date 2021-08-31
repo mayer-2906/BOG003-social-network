@@ -22,12 +22,15 @@ export const initial = () => {
       <input class="new loginButtons" type="button" onclick="location.href='#/newAccount';" value="Crear nueva cuenta"/>
   </div>
   </div>`;
-  const viewInicioScript = `
-  <script src="./indexView/indexInitial.js" type="module"></script>
-  `;
+  // const divScrpit = document.createElement('script');
+  // divScrpit.src = './indexView/indexInitial.js';
+  // divScrpit.type = 'module';
+  // const viewInicioScript = `
+  // <script src="./indexView/indexInitial.js" type="module"></script>
+  // `;
   const divElement = document.createElement('div');
   divElement.classList.add('divInitial');
   divElement.innerHTML = viewInicio;
-  document.getElementById('container').insertAdjacentHTML('afterend', viewInicioScript);
+  document.getElementById('scriptView').src = './indexView/indexInitial.js';
   return divElement;
 };
