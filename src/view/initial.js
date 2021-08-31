@@ -28,9 +28,9 @@ export const initial = () => {
   // const viewInicioScript = `
   // <script src="./indexView/indexInitial.js" type="module"></script>
   // `;
-  const divElement = document.createElement('div');
-  divElement.classList.add('divInitial');
-  divElement.innerHTML = viewInicio;
-  document.getElementById('scriptView').src = './indexView/indexInitial.js';
-  return divElement;
+  // const divElement = document.createElement('div');
+  // divElement.classList.add('divInitial');
+  // divElement.innerHTML = viewInicio;
+  // document.getElementById('scriptView').src = './indexView/indexInitial.js';
+  return viewInicio;
 };

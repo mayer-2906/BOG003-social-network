@@ -1,11 +1,18 @@
 import { signIn, logInWithGoogle } from '../functionFirebase.js';
+import { initial } from '../view/initial.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+/* eslint-disable */
+
+export const functionInitial = () => {
+  const divElement = document.createElement('div');
+  divElement.classList.add('divInitial');
+  divElement.innerHTML = initial();
+  document.addEventListener('DOMContentLoaded', () => {
 /* eslint-disable */
     console.log('estoy en el indexInitial');
 });
 
-const buttonLogIn = document.getElementById('logInBtn');
+const buttonLogIn = divElement.querySelector('#logInBtn');
 buttonLogIn.addEventListener('click', () => {
   userLogIn();
 });
@@ -21,7 +28,7 @@ const userLogIn = async () => {
   }
 };
 
-const buttonGoogle = document.getElementById('logInGoogle');
+const buttonGoogle = divElement.querySelector('#logInGoogle');
 buttonGoogle.addEventListener('click', () => {
   logInWithGoogle()
   .then((result) => {
@@ -44,7 +51,7 @@ buttonGoogle.addEventListener('click', () => {
   });
 });
 
-export const signInIndex = (email,password) =>{
+const signInIndex = (email,password) =>{
   signIn(email,password)
   .then((userCredential) => {
     /* eslint-disable */
@@ -58,26 +65,29 @@ export const signInIndex = (email,password) =>{
     console.log('Este es el error de firebase', errorCode)
     switch (errorCode) {
       case 'auth/invalid-email': {
-        document.getElementById('messageRegisteredUser').innerHTML = '❌ Correo inválido';
+        document.querySelector('#messageRegisteredUser').innerHTML = '❌ Correo inválido';
         break;
       }
       case 'auth/wrong-password': {
-        document.getElementById('messageRegisteredUser').innerHTML = '❌ Contraseña incorrecta';
+        document.querySelector('#messageRegisteredUser').innerHTML = '❌ Contraseña incorrecta';
         break;
       }
       case 'auth/too-many-requests': {
-        document.getElementById('messageRegisteredUser').innerHTML = '⚠ Superó los intentos válidos para ingresar';
+        document.querySelector('#messageRegisteredUser').innerHTML = '⚠ Superó los intentos válidos para ingresar';
         break;
       }
       
       case 'auth/user-not-found': {
-        document.getElementById('messageRegisteredUser').innerHTML = '❌ Usuario no registrado';
+        document.querySelector('#messageRegisteredUser').innerHTML = '❌ Usuario no registrado';
         break;
       }
       default: {
-        document.getElementById('messageRegisteredUser').innerHTML = '❌ Error inesperado, intente de nuevo';
+        document.querySelector('#messageRegisteredUser').innerHTML = '❌ Error inesperado, intente de nuevo';
         break;
       }
     }
   });
+}
+
+return divElement;
 }
