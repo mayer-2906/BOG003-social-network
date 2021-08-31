@@ -23,8 +23,10 @@ export const functionNewAccount = () => {
         await register(email, password)
         .then((userCredential) => {
           const user = firebase.auth().currentUser;
-          user.displayName = nameUser;
-          console.log('estoy en newAcconunt en then line 26: ', user)
+          user.updateProfile({
+            displayName: nameUser,
+          })
+          console.log('estoy en newAcconunt en then line 26: ', user.displayName)
           // var user = userCredential.user;
           // console.log(user.email);
           window.location.href = '#/initial';
