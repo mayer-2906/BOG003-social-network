@@ -6,6 +6,7 @@ export const functionPost = () => {
   divElement.innerHTML = post();
   const buttonSignOut = divElement.querySelector('#signOut');
   const inputPostUser = divElement.querySelector('#inputPostear');
+  const containerPosts = divElement.querySelector('#containerPost');
 
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
@@ -29,10 +30,27 @@ export const functionPost = () => {
 //   }
 // });
 
-  inputPostUser.addEventListener('click', () => {
+  inputPostUser.addEventListener('click', async () => {
     // window.location.href = '#/post';
-    loadPost();
-  });
+    divElement.querySelector('#containerPost').innerHTML='';
+    const recipe = divElement.querySelector('#recipePostear').value;
+    const fecha = new Date();
+    var db = firebase.firestore();
+    await db.collection("post").add({
+      name: "juanita",
+      recipe: recipe,
+      fecha: fecha.toUTCString(),
+      //buser:firebase.auth().getCurrentUser().uid,
+      })
+      .then((docRef) => {
+          loadPost();
+          console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+          console.error("Error adding document: ", error);
+      });
+    });
+
 
   const loadPost = () => {
     var db = firebase.firestore();
@@ -52,7 +70,7 @@ export const functionPost = () => {
       let addHtml = '';
       data.forEach(post => {
         const postData = post.data();
-        addHtml += createPost(postData, user);
+        addHtml = createPost(postData, user) + addHtml;
       });
       const divcontainerPost = document.createElement('div');
       divcontainerPost.innerHTML = addHtml;
@@ -103,6 +121,10 @@ export const functionPost = () => {
 
     return template;
   }
+
+  containerPosts.addEventListener('onload', () => {
+    loadPost();
+  });
   //loadPost();
   return divElement;
 }
