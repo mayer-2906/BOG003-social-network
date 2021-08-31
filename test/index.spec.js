@@ -1,5 +1,5 @@
 // importamos la funcion que vamos a testear
-import { myFunction } from '../src/lib/index';
+import { register, signIn, signOutDelicious, logInWithGoogle } from '../src/functionFirebase.js';
 
 describe('myFunction', () => {
   it('debería ser una función', () => {

@@ -3,35 +3,13 @@ import { newAccount } from '../view/newAccount.js';
 import { post } from '../view/post.js';
 import { edit } from '../view/edit.js';
 import { errors } from '../view/404.js';
-import { register, signIn, logInWithGoogle, signOutDelicious } from '../functionFirebase.js';
-
-export const dataRegister = () => {
-  const email = document.getElementById('email').value;
-  const confirmEmail = document.getElementById('confirmEmail').value;
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
-  /* eslint-disable */
-  console.log(email +''+ confirmEmail);
-  console.log(password + '' + confirmPassword);
-  if (email.length !== 0 && confirmEmail.length !== 0 && password.length !== 0 && confirmPassword.length !== 0) {
-    if (email === confirmEmail && password === confirmPassword) {
-      register(email, password);
-    } else {
-      document.getElementById('errorMessage').innerHTML = '⚠ Verifique el correo y contraseña';
-    }
-  } else {
-    document.getElementById('errorMessage').innerHTML = '❌ Debe llenar todos los campos';
-  }
-};
-const userLogIn = () => {
-  const email = document.getElementById('logInEmail').value;
-  const password = document.getElementById('logInPassword').value;
-  if (email.length !== 0 && password.length !== 0) {
-    signIn(email, password);
-  } else {
-    document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
-  }
-};
+import {
+  signInIndex,
+  logInGoogleIndex,
+  dataRegister,
+  signOutIndex,
+}
+  from '../index.js';
 
 export const changeView = (route) => {
   const container = document.getElementById('container');
@@ -44,11 +22,11 @@ export const changeView = (route) => {
       container.appendChild(initial());
       const buttonLogIn = document.getElementById('logInBtn');
       buttonLogIn.addEventListener('click', () => {
-        userLogIn();
+        signInIndex();
       });
       const buttonGoogle = document.getElementById('logInGoogle');
       buttonGoogle.addEventListener('click', () => {
-        logInWithGoogle();
+        logInGoogleIndex();
       });
       return container;
     }
@@ -64,7 +42,7 @@ export const changeView = (route) => {
       container.appendChild(post());
       const buttonSignOut = document.getElementById('signOut');
       buttonSignOut.addEventListener('click', () => {
-        signOutDelicious();
+        signOutIndex();
       });
       return container;
     }
@@ -74,5 +52,5 @@ export const changeView = (route) => {
     default: {
       return container.appendChild(errors());
     }
-}
+  }
 };
