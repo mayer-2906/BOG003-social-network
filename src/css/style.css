@@ -213,6 +213,7 @@ html {
   position: relative;
   margin-top: -20px;
   padding-top: 0;
+  cursor: pointer;
 }
 
 .containerMain {
