@@ -1,15 +1,19 @@
 import { register } from '../functionFirebase.js';
 import { newAccount } from '../view/newAccount.js';
-/* eslint-disable */
-console.log('Estoy en indexNewAccount');
 
+const cleanRegister = () => {
+  document.querySelector('#email').value = '';
+  document.querySelector('#confirmEmail').value = '';
+  document.querySelector('#password').value = '';
+  document.querySelector('#confirmPassword').value = '';
+};
 export const functionNewAccount = () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = newAccount();
   divElement.classList.add('divInitial');
   const inputLogin = divElement.querySelector('#signIn');
 
-  const  dataRegister = async () => {
+  const dataRegister = async () => {
     const nameUser = document.querySelector('#nameUser');
     const email = document.getElementById('email').value;
     const confirmEmail = document.getElementById('confirmEmail').value;
@@ -29,6 +33,7 @@ export const functionNewAccount = () => {
           console.log('estoy en newAcconunt en then line 26: ', user.displayName)
           // var user = userCredential.user;
           // console.log(user.email);
+          cleanRegister();
           window.location.href = '#/initial';
           // ...
         })
