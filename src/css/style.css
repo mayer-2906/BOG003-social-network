@@ -160,8 +160,7 @@ html {
 
 .searchPost {
   grid-column: 2/3;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
   align-content: flex-end;
 }
 
@@ -178,16 +177,6 @@ html {
   background-position-x: right;
   background-size: 15px;
   background-position-y: center;
-}
-
-.inputSearch{
-  width: 60px;
-  height: 50px;
-  margin: auto;
-  margin-bottom: 9px;
-  margin-left: 10px;
-  border-radius: 5px; 
-  background-image: url("../images/check.png");  
 }
 
 .helloUser {

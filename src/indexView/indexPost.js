@@ -6,7 +6,7 @@ export const functionPost = () => {
   divElement.innerHTML = post();
   const buttonSignOut = divElement.querySelector('#signOut');
   const inputPostUser = divElement.querySelector('#inputPostear');
-  // const searchInput = divElement.querySelector('#searchInput');
+  const searchInput = divElement.querySelector('#searchInput');
 
   document.addEventListener('DOMContentLoaded', async () => {
     /* eslint-disable */
@@ -53,7 +53,7 @@ export const functionPost = () => {
 
 
   const loadPost = () => {
-    var db = firebase.firestore();
+    const db = firebase.firestore();
     firebase.auth().onAuthStateChanged(user => {
       if(user){
         db.collection('post')
@@ -122,10 +122,10 @@ export const functionPost = () => {
     return template;
   }
   
-  // searchInput.addEventListener('keyup',async (e) => {
-  //   let search = e.target.value;
-  //   console.log(search);
-  // });
-  //loadPost();
+searchInput.addEventListener('keyup', (e) => {
+   let search = e.target.value;
+   console.log(search);
+ });
+//loadPost();
   return divElement;
 }

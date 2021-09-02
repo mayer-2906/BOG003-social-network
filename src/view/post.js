@@ -5,8 +5,7 @@ export const post = () => {
       <img class="imgPost" src="./images/Delicious!.png">
     </div>
     <div class="searchPost searchPostDesktop">
-      <input id="searchText" class="searchInput" type="text">
-      <input id="searchIInput" class="inputSearch" type="submit" value="">
+      <input id="searchInput" class="searchInput" type="text">
     </div>
     <div class="helloUser">
       <div class="textPost">
