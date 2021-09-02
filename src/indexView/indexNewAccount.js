@@ -9,8 +9,17 @@ export const functionNewAccount = () => {
   divElement.classList.add('divInitial');
   const inputLogin = divElement.querySelector('#signIn');
 
+  const cleanForm = () => {
+    document.querySelector('#nameUser').value='';
+    document.querySelector('#email').value='';
+    document.querySelector('#confirmEmail').value='';
+    document.querySelector('#password').value='';
+    document.querySelector('#confirmPassword').value='';
+    document.querySelector('#errorMessage').innerHTML='';
+
+  }
   const  dataRegister = async () => {
-    const nameUser = document.querySelector('#nameUser');
+    const nameUser = document.querySelector('#nameUser').value;
     const email = document.getElementById('email').value;
     const confirmEmail = document.getElementById('confirmEmail').value;
     const password = document.getElementById('password').value;
@@ -22,13 +31,13 @@ export const functionNewAccount = () => {
       if (email === confirmEmail && password === confirmPassword) {
         await register(email, password)
         .then((userCredential) => {
-          const user = firebase.auth().currentUser;
+          const user = userCredential.user;
           user.updateProfile({
             displayName: nameUser,
           })
-          console.log('estoy en newAcconunt en then line 26: ', user.displayName)
           // var user = userCredential.user;
           // console.log(user.email);
+          cleanForm();
           window.location.href = '#/initial';
           // ...
         })

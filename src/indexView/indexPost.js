@@ -6,48 +6,48 @@ export const functionPost = () => {
   divElement.innerHTML = post();
   const buttonSignOut = divElement.querySelector('#signOut');
   const inputPostUser = divElement.querySelector('#inputPostear');
-  const containerPosts = divElement.querySelector('#containerPost');
+  // const searchInput = divElement.querySelector('#searchInput');
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    /* eslint-disable */
+    // console.log('cargo indexPost');
+    loadPost();
+  });
 
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
       .then(() => {
-      /* eslint-disable */
-      console.log('sign out');
-      window.location.href = '#/initial';
+        /* eslint-disable */
+        // console.log('sign out');
+        window.location.href = '#/initial';
       }).catch((error) => {
-      console.log('sign out');
+      //console.log('sign out');
       });
   });
-// lo ideal es que carguen los post apenas hacen singin
-// var db = firebase.firestore();
-// firebase.auth().onAuthStateChanged(user => {
-//   if(user){
-//     db.collection('post')
-//       .get()
-//       .then((snapshot) => {
-//         showPost(snapshot.docs, user)
-//       })
-//   }
-// });
 
   inputPostUser.addEventListener('click', async () => {
     // window.location.href = '#/post';
-    divElement.querySelector('#containerPost').innerHTML='';
+    divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
+    const date = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()}`;
     var db = firebase.firestore();
+    const user = firebase.auth().currentUser;
+    // let userLogin='';
     await db.collection("post").add({
-      name: "juanita",
+      name: user.displayName,
       recipe: recipe,
-      fecha: fecha.toUTCString(),
-      //buser:firebase.auth().getCurrentUser().uid,
+      fecha: date,
+      user: user.uid,
       })
-      .then((docRef) => {
+      .then(() => {
           loadPost();
-          console.log("Document written with ID: ", docRef.id);
+          divElement.querySelector('#recipePostear').value='';
+          //console.log("Document written with ID: ", docRef.id);
       })
-      .catch((error) => {
-          console.error("Error adding document: ", error);
+      .catch(() => {
+          alert('Lo sentimos no pudimos agregar tu post, intenta de nuevo');
+          divElement.querySelector('#recipePostear').value='';
       });
     });
 
@@ -59,6 +59,8 @@ export const functionPost = () => {
         db.collection('post')
           .get()
           .then((snapshot) => {
+            const helloUser = divElement.querySelector('#helloUser');
+            helloUser.innerHTML = `Hola ${user.displayName}`; 
             showPost(snapshot.docs, user)
           })
       }
@@ -70,7 +72,7 @@ export const functionPost = () => {
       let addHtml = '';
       data.forEach(post => {
         const postData = post.data();
-        addHtml = createPost(postData, user) + addHtml;
+        addHtml += createPost(postData, user);
       });
       const divcontainerPost = document.createElement('div');
       divcontainerPost.innerHTML = addHtml;
@@ -80,8 +82,6 @@ export const functionPost = () => {
   }
 
   const createPost = (data, user) => {
-    console.log(data)
-    console.log(user)
     let template = '';
     if(data.user===user.uid){
       template = `
@@ -121,10 +121,11 @@ export const functionPost = () => {
 
     return template;
   }
-
-  containerPosts.addEventListener('onload', () => {
-    loadPost();
-  });
+  
+  // searchInput.addEventListener('keyup',async (e) => {
+  //   let search = e.target.value;
+  //   console.log(search);
+  // });
   //loadPost();
   return divElement;
 }

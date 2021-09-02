@@ -19,7 +19,7 @@ export const initial = () => {
   </div>
   <div class="divNewUser">
       <p class="newUser textInit">¿Aún no haces parte de Delicious?</p>
-      <input class="new loginButtons" type="button" onclick="location.href='#/newAccount';" value="Crear nueva cuenta"/>
+      <input id="inputCreateUser"class="new loginButtons" type="button"  value="Crear nueva cuenta"/>
   </div>
   </div>`;
   // const divScrpit = document.createElement('script');

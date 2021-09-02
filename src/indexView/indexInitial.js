@@ -9,13 +9,21 @@ export const functionInitial = () => {
   divElement.innerHTML = initial();
   document.addEventListener('DOMContentLoaded', () => {
 /* eslint-disable */
-    console.log('estoy en el indexInitial');
-});
+    console.log('estoy en el indexInitial 3');
+  });
 
 const buttonLogIn = divElement.querySelector('#logInBtn');
 buttonLogIn.addEventListener('click', () => {
   userLogIn();
 });
+
+const inputCreateUser = divElement.querySelector('#inputCreateUser');
+inputCreateUser.addEventListener('click', () => {
+  cleanForm();
+  window.location.href = '#/newAccount';
+});
+
+"location.href='#/newAccount';"
 
 const userLogIn = async () => {
   const email = document.getElementById('logInEmail').value;
@@ -23,7 +31,6 @@ const userLogIn = async () => {
   if (email.length !== 0 && password.length !== 0) {
     await signInIndex(email, password);  
   } else {
-    console.log('error de registro')
     document.getElementById('messageRegisteredUser').innerHTML = '❌ Debe llenar todos los campos';
   }
 };
@@ -51,12 +58,19 @@ buttonGoogle.addEventListener('click', () => {
   });
 });
 
+const cleanForm = () => {
+  document.querySelector('#logInEmail').value='';
+  document.querySelector('#logInPassword').value='';
+  document.querySelector('#messageRegisteredUser').innerHTML='';
+
+}
+
 const signInIndex = (email,password) =>{
   signIn(email,password)
   .then((userCredential) => {
     /* eslint-disable */
     var user = userCredential.user;
-    console.log(user.email);
+    cleanForm();
     window.location.href = '#/post';
     // ...
   })

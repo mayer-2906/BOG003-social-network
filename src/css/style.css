@@ -147,7 +147,7 @@ html {
 .logoPost {
   grid-column: 1/2;
   display: flex;
-  align-content: flex-end;
+  align-content: center;
 }
 
 .imgPost {
@@ -160,23 +160,34 @@ html {
 
 .searchPost {
   grid-column: 2/3;
-  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
   align-content: flex-end;
 }
 
 .searchPost input {
-  width: 100%;
-  height: 25%;
+  width: 75%;
+  height: 50px;
   margin: auto;
   margin-bottom: 9px;
   margin-left: 10px;
   border-radius: 5px;
   border: 1px solid var(--inputBorder);
-  background-image: url("./images/loupe.png");
+  background-image: url("../images/loupe.png");
   background-repeat: no-repeat;
   background-position-x: right;
   background-size: 15px;
   background-position-y: center;
+}
+
+.inputSearch{
+  width: 60px;
+  height: 50px;
+  margin: auto;
+  margin-bottom: 9px;
+  margin-left: 10px;
+  border-radius: 5px; 
+  background-image: url("../images/check.png");  
 }
 
 .helloUser {
