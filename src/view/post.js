@@ -5,11 +5,11 @@ export const post = () => {
       <img class="imgPost" src="./images/Delicious!.png">
     </div>
     <div class="searchPost searchPostDesktop">
-      <input class="searchInput" type="text">
+      <input id="searchInput" class="searchInput" type="text">
     </div>
     <div class="helloUser">
       <div class="textPost">
-        <p class="hello helloDesktop" >Hola Usuario</p>
+        <p id="helloUser" class="hello helloDesktop" ></p>
         <p id='signOut' class="signOut signOutDesktop">Cerrar sesión</p>
       </div>
     </div>
@@ -23,8 +23,5 @@ export const post = () => {
     </div>
   </main>
   `;
-  // const divElement = document.createElement('div');
-  // divElement.innerHTML = viewTimeLine;
-  // document.getElementById('scriptView').src = './indexView/indexPost.js';
   return viewTimeLine;
 };

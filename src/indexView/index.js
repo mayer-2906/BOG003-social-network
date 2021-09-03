@@ -4,7 +4,8 @@ import { functionNewAccount } from './indexNewAccount.js';
 import { functionEdit } from './indexEdit.js';
 import { functionErrors } from './indexError.js';
 /* eslint-disable */
-console.log('estoy en index');
+//aquí se crea un objeto con los archivos js de cada vista, para que cada archivo sea el que traiga cada plantilla(vista).
+
 const view = {
   initial: functionInitial(),
   newAccount: functionNewAccount(),

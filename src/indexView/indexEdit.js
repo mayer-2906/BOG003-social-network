@@ -8,5 +8,4 @@ export const functionEdit = () => {
     window.location.href = '#/post';
   });
   return divElement;
-// eslint-disable-next-line semi
-}
+};

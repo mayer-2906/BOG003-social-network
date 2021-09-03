@@ -6,60 +6,63 @@ export const functionPost = () => {
   divElement.innerHTML = post();
   const buttonSignOut = divElement.querySelector('#signOut');
   const inputPostUser = divElement.querySelector('#inputPostear');
-  const containerPosts = divElement.querySelector('#containerPost');
+  const searchInput = divElement.querySelector('#searchInput');
+  let enableEdit = true;
+  document.addEventListener('DOMContentLoaded', async () => {
+    /* eslint-disable */
+    // console.log('cargo indexPost');
+    loadPost();
+  });
 
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
       .then(() => {
-      /* eslint-disable */
-      console.log('sign out');
-      window.location.href = '#/initial';
+        /* eslint-disable */
+        // console.log('sign out');
+        window.location.href = '#/initial';
       }).catch((error) => {
-      console.log('sign out');
+      //console.log('sign out');
       });
   });
-// lo ideal es que carguen los post apenas hacen singin
-// var db = firebase.firestore();
-// firebase.auth().onAuthStateChanged(user => {
-//   if(user){
-//     db.collection('post')
-//       .get()
-//       .then((snapshot) => {
-//         showPost(snapshot.docs, user)
-//       })
-//   }
-// });
 
   inputPostUser.addEventListener('click', async () => {
     // window.location.href = '#/post';
-    divElement.querySelector('#containerPost').innerHTML='';
+    divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
+    const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
     var db = firebase.firestore();
+    const user = firebase.auth().currentUser;
+    // let userLogin='';
     await db.collection("post").add({
-      name: "juanita",
+      name: user.displayName,
       recipe: recipe,
-      fecha: fecha.toUTCString(),
-      //buser:firebase.auth().getCurrentUser().uid,
+      fecha: date,
+      user: user.uid,
       })
-      .then((docRef) => {
+      .then(() => {
           loadPost();
-          console.log("Document written with ID: ", docRef.id);
+          divElement.querySelector('#recipePostear').value='';
+          //console.log("Document written with ID: ", docRef.id);
       })
-      .catch((error) => {
-          console.error("Error adding document: ", error);
+      .catch(() => {
+          alert('Lo sentimos no pudimos agregar tu post, intenta de nuevo');
+          divElement.querySelector('#recipePostear').value='';
       });
     });
 
 
   const loadPost = () => {
-    var db = firebase.firestore();
+    const db = firebase.firestore();
     firebase.auth().onAuthStateChanged(user => {
       if(user){
         db.collection('post')
           .get()
           .then((snapshot) => {
+            const helloUser = divElement.querySelector('#helloUser');
+            helloUser.innerHTML = `Hola ${user.displayName}`; 
             showPost(snapshot.docs, user)
+            editing();
           })
       }
     });
@@ -70,7 +73,8 @@ export const functionPost = () => {
       let addHtml = '';
       data.forEach(post => {
         const postData = post.data();
-        addHtml = createPost(postData, user) + addHtml;
+        const idPost = post.id
+        addHtml += createPost(postData, user, idPost);
       });
       const divcontainerPost = document.createElement('div');
       divcontainerPost.innerHTML = addHtml;
@@ -78,23 +82,44 @@ export const functionPost = () => {
       divElement.querySelector('#containerPost').appendChild(divcontainerPost);
     }
   }
+  const editing = () => {
+    const inputEditar = divElement.querySelectorAll(".inputEditDesktop");
+    console.log('esto son los inputs ', inputEditar);
+    inputEditar.forEach(editButton => {
+      editButton.addEventListener('click',async (e)=>{
+        if (enableEdit) {
+          const textAreaBox = divElement.querySelector(`.${e.target.id}`);
+          textAreaBox.disabled = false;
+          divElement.querySelector(`#${e.target.id}`).value = "Guardar";
+          enableEdit = false;
+        }
+        else {
+          const editedPost = divElement.querySelector(`.${e.target.id}`).value;
+          console.log(e.target.id);
+          console.log(editedPost);
+          const db = firebase.firestore();
+          await db.collection("posts").doc(`${e.target.id}`).update({name: "Daniela",
+            recipe: editedPost,
+            fecha: "2/9/21",
+            user: "444444",});
+          enableEdit = true;
+        }
+        
+      })
+    })}
 
-  const createPost = (data, user) => {
-    console.log(data)
-    console.log(user)
+  const createPost = (data, user, idPost) => {
     let template = '';
     if(data.user===user.uid){
       template = `
-      <div class="containerPosts">
+      <div class="userContainerPost">
         <div class="userContainerPost">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
             <p class="datePost datePostDesktop">${data.fecha}</p>
-            <input class="inputEdit inputEditDesktop" type="button" onclick="location.href='#/edit';" value="Editar"/>
+            <input id= "${idPost}" class="inputEdit inputEditDesktop" type="button" value="Editar"/>
           </div>
-           <textarea class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
-          <div class="recipe">
-          </div>
+           <textarea class = "${idPost}"  class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
             <img class="like likeDesktop" src="./images/like.png" alt="">
             <img class="delete deleteDesktop" src="./images/delete.png" alt="">
@@ -104,7 +129,7 @@ export const functionPost = () => {
       `;
     } else {
       template = `
-        <div class="userContainerPost">
+        <div class= "containerPosts">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
             <p class="datePost datePostDesktop">${data.fecha}</p>
@@ -121,10 +146,11 @@ export const functionPost = () => {
 
     return template;
   }
-
-  containerPosts.addEventListener('onload', () => {
-    loadPost();
-  });
-  //loadPost();
+  
+searchInput.addEventListener('keyup', (e) => {
+   let search = e.target.value;
+   console.log(search);
+ });
+//loadPost();
   return divElement;
 }

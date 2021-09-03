@@ -16,9 +16,6 @@ export const changeView = (route) => {
     case '#/post': {
       return container.appendChild(view.post);
     }
-    case '#/edit': {
-      return container.appendChild(view.edit);
-    }
     default: {
       return container.appendChild(view.errors);
     }
