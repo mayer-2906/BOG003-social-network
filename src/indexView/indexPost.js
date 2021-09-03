@@ -30,7 +30,7 @@ export const functionPost = () => {
     divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
-    const date = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()}`;
+    const date = `${fecha.getDate()}/${fecha.getMonth()+1}/${fecha.getFullYear()}`;
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
     // let userLogin='';
@@ -72,7 +72,8 @@ export const functionPost = () => {
       let addHtml = '';
       data.forEach(post => {
         const postData = post.data();
-        addHtml += createPost(postData, user);
+        const idPost = post.id;
+        addHtml += createPost(postData, user, idPost);
       });
       const divcontainerPost = document.createElement('div');
       divcontainerPost.innerHTML = addHtml;
@@ -81,7 +82,7 @@ export const functionPost = () => {
     }
   }
 
-  const createPost = (data, user) => {
+  const createPost = (data, user, idPost) => {
     let template = '';
     if(data.user===user.uid){
       template = `
@@ -93,8 +94,6 @@ export const functionPost = () => {
             <input class="inputEdit inputEditDesktop" type="button" onclick="location.href='#/edit';" value="Editar"/>
           </div>
            <textarea class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
-          <div class="recipe">
-          </div>
           <div class="footerPost">
             <img class="like likeDesktop" src="./images/like.png" alt="">
             <img class="delete deleteDesktop" src="./images/delete.png" alt="">
@@ -110,8 +109,6 @@ export const functionPost = () => {
             <p class="datePost datePostDesktop">${data.fecha}</p>
           </div>
            <textarea class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
-          <div class="recipe">
-          </div>
           <div class="footerPost">
             <img class="like" src="./images/like.png" alt="">
           </div>
