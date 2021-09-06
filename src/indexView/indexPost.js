@@ -12,6 +12,8 @@ export const functionPost = () => {
     /* eslint-disable */
     // console.log('cargo indexPost');
     loadPost();
+    editing();
+    deliting();
   });
 
   buttonSignOut.addEventListener('click', () => {
@@ -62,7 +64,8 @@ export const functionPost = () => {
             const helloUser = divElement.querySelector('#helloUser');
             helloUser.innerHTML = `Hola ${user.displayName}`; 
             showPost(snapshot.docs, user)
-            editing();
+            //editing();
+            //deliting();
           })
       }
     });
@@ -98,22 +101,37 @@ export const functionPost = () => {
           console.log(e.target.id);
           console.log(editedPost);
           const db = firebase.firestore();
-          await db.collection("posts").doc(`${e.target.id}`).update({name: "Daniela",
-            recipe: editedPost,
-            fecha: "2/9/21",
-            user: "444444",});
+          const fecha = new Date();
+          const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost, fecha: date,});
           enableEdit = true;
+          loadPost();
         }
         
       })
     })}
 
+     const deliting = () => {
+      const deleteButtons = divElement.querySelectorAll(".deleteDesktop");
+      console.log('esto son los delete ', deleteButtons);
+      deleteButtons.forEach(deleteButton => {
+      deleteButton.addEventListener('click',async (e)=>{
+      const db = firebase.firestore();
+      const idButtonDelete = e.target.dataset.id;
+      console.log(idButtonDelete);
+      await db.collection("post").doc(idButtonDelete).delete();
+      loadPost(); 
+    }
+      
+     )})}
+    
+
   const createPost = (data, user, idPost) => {
     let template = '';
     if(data.user===user.uid){
       template = `
-      <div class="userContainerPost">
-        <div class="userContainerPost">
+      <div class= "userContainerPost">
+      <div class= "userContainerPost">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
             <p class="datePost datePostDesktop">${data.fecha}</p>
@@ -122,9 +140,9 @@ export const functionPost = () => {
            <textarea class = "${idPost}"  class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
             <img class="like likeDesktop" src="./images/like.png" alt="">
-            <img class="delete deleteDesktop" src="./images/delete.png" alt="">
+            <img data-id="${idPost}" class="delete deleteDesktop" src="./images/delete.png" type="button" alt="" />
           </div>
-        </div>
+          </div>
       </div>
       `;
     } else {
