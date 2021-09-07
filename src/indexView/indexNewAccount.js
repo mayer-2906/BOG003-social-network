@@ -7,7 +7,6 @@ const cleanRegister = () => {
   document.querySelector('#confirmEmail').value = '';
   document.querySelector('#password').value = '';
   document.querySelector('#confirmPassword').value = '';
-
 };
 export const functionNewAccount = () => {
   const divElement = document.createElement('div');
@@ -34,10 +33,10 @@ export const functionNewAccount = () => {
           })
           cleanRegister();
           window.location.href = '#/initial';
-          // const config = {
-          //   url: 'https://danif70.github.io/BOG003-social-network/src/#/initial'
-          // }
-          // userCredential.user.sendEmailVerification(config)
+          const config = {
+            url: 'https://camilaforer.github.io/BOG003-social-network/src/#/initial'
+          }
+          userCredential.user.sendEmailVerification(config)
         })
         .catch((error) => {
           /* eslint-disable */

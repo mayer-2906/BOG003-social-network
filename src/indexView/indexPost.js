@@ -10,7 +10,6 @@ export const functionPost = () => {
   let enableEdit = true;
   document.addEventListener('DOMContentLoaded', async () => {
     /* eslint-disable */
-    // console.log('cargo indexPost');
     loadPost();
   });
 
@@ -18,10 +17,8 @@ export const functionPost = () => {
     signOutDelicious()
       .then(() => {
         /* eslint-disable */
-        // console.log('sign out');
         window.location.href = '#/initial';
       }).catch((error) => {
-      //console.log('sign out');
       });
   });
 

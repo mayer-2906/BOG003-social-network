@@ -16,7 +16,13 @@ export const functionInitial = () => {
     signIn(email, password)
       .then(() => {
         cleanInitial();
-        window.location.href = '#/post';
+        const verified = firebase.auth().currentUser.emailVerified;
+        if (verified) {
+          window.location.href = '#/post';
+        } else {
+          console.log(firebase.auth().currentUser);
+          document.querySelector('#messageRegisteredUser').innerHTML = 'Correo no verificado';
+        }
       })
       .catch((error) => {
         const errorCode = error.code;

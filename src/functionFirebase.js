@@ -11,6 +11,3 @@ export const logInWithGoogle = () => {
 };
 
 export const signOutDelicious = () => firebase.auth().signOut();
-
-export const useremail = (userEmail) => firebase.auth()
-  .generateEmailVerificationLink(userEmail);
