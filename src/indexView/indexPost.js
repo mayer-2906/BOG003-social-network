@@ -12,8 +12,6 @@ export const functionPost = () => {
     /* eslint-disable */
     // console.log('cargo indexPost');
     loadPost();
-    // editing();
-    // deliting();
   });
 
   buttonSignOut.addEventListener('click', () => {
@@ -137,7 +135,7 @@ export const functionPost = () => {
             <p class="datePost datePostDesktop">${data.fecha}</p>
             <input id= "${idPost}" class="inputEdit inputEditDesktop" type="button" value="Editar"/>
           </div>
-           <textarea class = "${idPost}"  class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
+           <textarea class = "textAreaGray ${idPost}" cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
             <img class="like likeDesktop" src="./images/like.png" alt="">
             <img data-id="${idPost}" class="delete deleteDesktop" src="./images/delete.png" type="button" alt="" />

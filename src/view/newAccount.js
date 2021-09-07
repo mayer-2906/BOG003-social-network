@@ -6,7 +6,7 @@ export const newAccount = () => {
       <p class="description">Delicious te ayuda a compartir y encontrar recetas de todos los tipos, ¿Qué esperas para unirte?</p>
     </div>
     <div id="containerLoginRegister" class="containerLogin containerLoginRegister">
-      <input id="nameUser" class="loginButtons buttonsRegister" type="text" placeholder="Nombre completo"/>
+      <input id="nameUser" class="loginButtons buttonsRegister" type="text" placeholder="Nombre completo" required>
       <input id="email" class="loginButtons buttonsRegister" type="email" placeholder="Correo electrónico"/>
       <input id="confirmEmail" class="loginButtons buttonsRegister" type="email" placeholder="Confirmar correo electrónico"/>
       <input id="password" class="loginButtons buttonsRegister" type="password" placeholder="Contraseña"/>

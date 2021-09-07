@@ -172,7 +172,7 @@ html {
   margin-left: 10px;
   border-radius: 5px;
   border: 1px solid var(--inputBorder);
-  background-image: url("/src/images/loupe.png");
+  background-image: url("../src/images/loupe.png");
   background-repeat: no-repeat;
   background-position-x: right;
   background-size: 15px;
@@ -300,6 +300,7 @@ html {
   outline: none;
   font-size: 12px;
 }
+
 .textAreaGray {
   margin: auto;
   width: 90%;
