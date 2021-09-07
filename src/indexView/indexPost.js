@@ -27,14 +27,14 @@ export const functionPost = () => {
     divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
-    const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+    // const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
     // let userLogin='';
     await db.collection("post").add({
       name: user.displayName,
       recipe: recipe,
-      fecha: date,
+      fecha: fecha,
       user: user.uid,
       })
       .then(() => {
@@ -53,7 +53,7 @@ export const functionPost = () => {
     const db = firebase.firestore();
     firebase.auth().onAuthStateChanged(user => {
       if(user){
-        db.collection('post')
+        db.collection('post').orderBy('fecha','desc')
           .get()
           .then((snapshot) => {
             const helloUser = divElement.querySelector('#helloUser');
@@ -71,6 +71,9 @@ export const functionPost = () => {
       let addHtml = '';
       data.forEach(post => {
         const postData = post.data();
+        const date = new Date(postData.fecha.seconds*1000)
+        postData.fecha = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        // console.log('el console', postData)
         const idPost = post.id
         addHtml += createPost(postData, user, idPost);
       });

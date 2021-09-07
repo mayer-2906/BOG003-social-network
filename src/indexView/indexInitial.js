@@ -21,7 +21,7 @@ export const functionInitial = () => {
           window.location.href = '#/post';
         } else {
           console.log(firebase.auth().currentUser);
-          document.querySelector('#messageRegisteredUser').innerHTML = 'Correo no verificado';
+          document.querySelector('#messageRegisteredUser').innerHTML = '⚠ Correo no verificado';
         }
       })
       .catch((error) => {
