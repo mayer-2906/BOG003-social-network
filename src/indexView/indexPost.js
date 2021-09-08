@@ -232,7 +232,7 @@ const searching = () => {
    //console.log(postBuscados.docs);
    const postsShearch =[];
    postBuscados.docs.forEach(post=>{
-     if(post.data().recipe.includes(search)){
+     if(post.data().recipe.toLowerCase().includes(search.toLowerCase())){
        postsShearch.push(post);
        //console.log(post.data());
      }
