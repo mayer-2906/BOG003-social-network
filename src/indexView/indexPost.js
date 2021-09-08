@@ -96,10 +96,11 @@ export const functionPost = () => {
         addHtml += createPost(postData, user, idPost);
         //addHtml += createPost(post, user);
       });
-      const divcontainerPost = document.createElement('div');
-      divcontainerPost.innerHTML = addHtml;
+      // const divcontainerPost = document.createElement('div');
+      //divcontainerPost.innerHTML = addHtml;
       divElement.querySelector('#containerPost').innerHTML='';
-      divElement.querySelector('#containerPost').appendChild(divcontainerPost);
+      //divElement.querySelector('#containerPost').appendChild(divcontainerPost);
+      divElement.querySelector('#containerPost').innerHTML=addHtml;
       liking();
     }
   }
@@ -197,7 +198,7 @@ export const functionPost = () => {
     let template = '';
     if(data.user===user.uid){
       template = `
-      <div class= "userContainerPost">
+      <div class= "containerPost">
       <div class= "userContainerPost">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
@@ -215,7 +216,7 @@ export const functionPost = () => {
       `;
     } else {
       template = `
-        <div class= "containerPosts">
+        <div class= "containerPost">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
             <p class="datePost datePostDesktop">${data.fecha}</p>

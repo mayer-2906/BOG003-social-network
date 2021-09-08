@@ -1,4 +1,4 @@
-import { register } from '../functionFirebase.js';
+import { register, emailVerification } from '../functionFirebase.js';
 import { newAccount } from '../view/newAccount.js';
 
 const cleanRegister = () => {
@@ -21,8 +21,8 @@ export const functionNewAccount = () => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     /* eslint-disable */
-    console.log(email +''+ confirmEmail);
-    console.log(password + '' + confirmPassword);
+    //console.log(email +''+ confirmEmail);
+    //console.log(password + '' + confirmPassword);
     if (email.length !== 0 && confirmEmail.length !== 0 && password.length !== 0 && confirmPassword.length !== 0) {
       if (email === confirmEmail && password === confirmPassword) {
         await register(email, password)
@@ -31,12 +31,13 @@ export const functionNewAccount = () => {
           user.updateProfile({
             displayName: nameUser,
           })
+          // const config = {
+          //   url: 'https://camilaforer.github.io/BOG003-social-network/src/#/initial'
+          // }
+          // userCredential.user.sendEmailVerification(config);
           cleanRegister();
           window.location.href = '#/initial';
-          const config = {
-            url: 'https://mayer-2906.github.io/BOG003-social-network/src/index.html#/initial'
-          }
-          userCredential.user.sendEmailVerification(config)
+          emailVerification();
         })
         .catch((error) => {
           /* eslint-disable */

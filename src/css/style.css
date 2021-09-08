@@ -252,9 +252,9 @@ html {
   font-size: 15px;
   font-weight: bold;
 }
-.containerPosts {
+.containerPost {
   position: relative;
-  margin-top: 20%;
+  margin-top: 3%;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -262,7 +262,6 @@ html {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  margin-top: 3%
 
 }
 .userContainerPost {
