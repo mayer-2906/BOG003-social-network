@@ -16,6 +16,7 @@ export const functionPost = () => {
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
       .then(() => {
+        searchInput.value='';
         /* eslint-disable */
         window.location.href = '#/initial';
       }).catch((error) => {
@@ -58,32 +59,15 @@ export const functionPost = () => {
             const helloUser = divElement.querySelector('#helloUser');
             helloUser.innerHTML = `Hola ${user.displayName}`; 
             showPost(snapshot.docs, user)
-            editing();
-            deliting();
-            liking();
+            //editing();
+            //deliting();
+            //liking();
+            //searching();
           })
       }
     });
   }
 
-  // const ordenarPost = (datos) =>{
-  //   let postSort=[];
-  //   datos.forEach(post => {
-  //     const newPost={
-  //       fecha: post.data().fecha,
-  //       name: post.data().name,
-  //       recipe: post.data().recipe,
-  //       user: post.data().user,
-  //       like: post.data().like,
-  //       id: post.id,
-  //     }
-  //     postSort.push(newPost);
-  //     //console.log(post.data().fecha);
-  //   })
-  //   postSort.sort((a,b)=>b.fecha-a.fecha);
-  //   console.log(postSort);
-  //   return postSort;
-  // }
 
   const showPost = (data, user) => {
     if(data.length){
@@ -101,7 +85,11 @@ export const functionPost = () => {
       divElement.querySelector('#containerPost').innerHTML='';
       //divElement.querySelector('#containerPost').appendChild(divcontainerPost);
       divElement.querySelector('#containerPost').innerHTML=addHtml;
+      //liking();
+      editing();
+      deliting();
       liking();
+      searching();
     }
   }
 
@@ -128,39 +116,42 @@ export const functionPost = () => {
           loadPost();
         }
       })
-    })}
+    })
+  }
 
     const confirmationDelete = () => {
       let delConfirm = confirm("¿Seguro quieres eliminar el post?");
         if( delConfirm == true ) {
           return true;
-      } else {
+        } else {
           return false;
-              }
-      }
+        }
+    }
 
     const deliting = () => {
       const deleteButtons = divElement.querySelectorAll(".deleteDesktop");
       //console.log('esto son los delete ', deleteButtons);
       deleteButtons.forEach(deleteButton => {
-      deleteButton.addEventListener('click',async (e)=>{
-      //alert()para confirmar eliminar el post
-      if (confirmationDelete()=== true){
-      const db = firebase.firestore();
-      const idButtonDelete = e.target.dataset.id;
-      //console.log(idButtonDelete);
-      await db.collection("post").doc(idButtonDelete).delete();
-      loadPost();
+        deleteButton.addEventListener('click',async (e)=>{
+        //alert()para confirmar eliminar el post
+          if (confirmationDelete()=== true){
+            const db = firebase.firestore();
+            const idButtonDelete = e.target.dataset.id;
+            //console.log(idButtonDelete);
+            await db.collection("post").doc(idButtonDelete).delete();
+            loadPost();
+          }
+          else {
+            loadPost(); 
+          }
+        })
+      })
     }
-      else {
-      loadPost(); 
-    }}
-    )})}
 
     const liking = () => {
       const likesButtons = divElement.querySelectorAll("#likeImage");
       likesButtons.forEach(likeButton => {
-        likeButton.addEventListener('click',async (e)=>{
+        likeButton.addEventListener('click', async (e)=>{
           const db = firebase.firestore();
           const idButtonLike = e.target.dataset.id;
           // console.log(idButtonDelete);
@@ -233,8 +224,8 @@ export const functionPost = () => {
     }
     return template;
   }
-
-searchInput.addEventListener('keyup', async (e) => {
+const searching = () => {
+  searchInput.addEventListener('keyup', async (e) => {
    let search = e.target.value;
    //console.log(search);
    const postBuscados = await firebase.firestore().collection('post').orderBy('fecha', 'desc').get();
@@ -249,7 +240,10 @@ searchInput.addEventListener('keyup', async (e) => {
    })
    const user=firebase.auth().currentUser;
    //console.log(user.displayName);
-   showPost(postsShearch, user);
- });
+   if(postsShearch.length>0){
+    showPost(postsShearch, user);
+   }   
+   });
+  }
   return divElement;
 }
