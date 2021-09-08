@@ -171,10 +171,23 @@ font-weight: bold;
 .inputEditDesktop{
   font-size: 20px;
 }
-.like{
+.like {
   width: 5%;
+  margin-left: 10%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.countLike{
+  position:absolute;
+  font-weight: bold;
+  font-size: 17px;
+  text-align: left;
+  margin-left:12% ;
 }
 .delete{
   margin-top: 6%;
   width: 10%;
+}
+.textAreaGray {
+  font-size:20px;
 }

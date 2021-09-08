@@ -20,8 +20,7 @@ export const functionInitial = () => {
         if (verified) {
           window.location.href = '#/post';
         } else {
-          console.log(firebase.auth().currentUser);
-          document.querySelector('#messageRegisteredUser').innerHTML = '⚠ Correo no verificado';
+          document.querySelector('#messageRegisteredUser').innerHTML = '⚠ Revise su bandeja de entrada y verifique su correo';
         }
       })
       .catch((error) => {

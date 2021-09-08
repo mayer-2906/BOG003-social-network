@@ -9,7 +9,7 @@ export const functionPost = () => {
   const searchInput = divElement.querySelector('#searchInput');
   let enableEdit = true;
   document.addEventListener('DOMContentLoaded', async () => {
-    /* eslint-disable */
+    /* eslint-disable */;
     loadPost();
   });
 
@@ -27,7 +27,7 @@ export const functionPost = () => {
     divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
-    // const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+    //const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
     // let userLogin='';
@@ -36,11 +36,11 @@ export const functionPost = () => {
       recipe: recipe,
       fecha: fecha,
       user: user.uid,
+      like: [],
       })
       .then(() => {
           loadPost();
           divElement.querySelector('#recipePostear').value='';
-          //console.log("Document written with ID: ", docRef.id);
       })
       .catch(() => {
           alert('Lo sentimos no pudimos agregar tu post, intenta de nuevo');
@@ -48,12 +48,11 @@ export const functionPost = () => {
       });
     });
 
-
   const loadPost = () => {
     const db = firebase.firestore();
     firebase.auth().onAuthStateChanged(user => {
       if(user){
-        db.collection('post').orderBy('fecha','desc')
+        db.collection('post').orderBy('fecha', 'desc')
           .get()
           .then((snapshot) => {
             const helloUser = divElement.querySelector('#helloUser');
@@ -61,6 +60,7 @@ export const functionPost = () => {
             showPost(snapshot.docs, user)
             editing();
             deliting();
+            liking();
           })
       }
     });
@@ -73,19 +73,20 @@ export const functionPost = () => {
         const postData = post.data();
         const date = new Date(postData.fecha.seconds*1000)
         postData.fecha = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-        // console.log('el console', postData)
-        const idPost = post.id
+        const idPost = post.id;
         addHtml += createPost(postData, user, idPost);
       });
       const divcontainerPost = document.createElement('div');
       divcontainerPost.innerHTML = addHtml;
       divElement.querySelector('#containerPost').innerHTML='';
       divElement.querySelector('#containerPost').appendChild(divcontainerPost);
+      liking();
     }
   }
+
   const editing = () => {
     const inputEditar = divElement.querySelectorAll(".inputEditDesktop");
-    console.log('esto son los inputs ', inputEditar);
+    //console.log('esto son los inputs ', inputEditar);
     inputEditar.forEach(editButton => {
       editButton.addEventListener('click',async (e)=>{
         if (enableEdit) {
@@ -101,29 +102,77 @@ export const functionPost = () => {
           const db = firebase.firestore();
           const fecha = new Date();
           const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost, fecha: date,});
+          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost, fecha: fecha,});
           enableEdit = true;
           loadPost();
         }
-        
       })
     })}
 
-     const deliting = () => {
+    const confirmationDelete = () => {
+      let delConfirm = confirm("¿Seguro quieres eliminar el post?");
+        if( delConfirm == true ) {
+          return true;
+      } else {
+          return false;
+              }
+      }
+
+    const deliting = () => {
       const deleteButtons = divElement.querySelectorAll(".deleteDesktop");
-      console.log('esto son los delete ', deleteButtons);
+      //console.log('esto son los delete ', deleteButtons);
       deleteButtons.forEach(deleteButton => {
       deleteButton.addEventListener('click',async (e)=>{
+      //alert()para confirmar eliminar el post
+      if (confirmationDelete()=== true){
       const db = firebase.firestore();
       const idButtonDelete = e.target.dataset.id;
       console.log(idButtonDelete);
       await db.collection("post").doc(idButtonDelete).delete();
-      loadPost(); 
+      loadPost();
     }
-      
-     )})}
-    
+      else {
+      loadPost(); 
+    }}
+    )})}
 
+    const liking = () => {
+      const likesButtons = divElement.querySelectorAll("#likeImage");
+      likesButtons.forEach(likeButton => {
+        likeButton.addEventListener('click',async (e)=>{
+          const db = firebase.firestore();
+          const idButtonLike = e.target.dataset.id;
+          // console.log(idButtonDelete);
+          const postLike = await db.collection("post").doc(idButtonLike).get();
+          console.log(postLike.data());
+          const likes =postLike.data().like;
+          const user = firebase.auth().currentUser;
+          if(likes.length>0){
+            if(likes.includes(user.uid)){
+              console.log("ya le dio like");
+              let newlikes=[];
+              likes.forEach(item=>{
+                if(item!==user.uid){
+                  newlikes.push(item);
+                }
+              })
+              await db.collection("post").doc(`${idButtonLike}`).update({like: newlikes});
+            } else {
+              //const user = firebase.auth().currentUser;
+              likes.push(user.uid);
+              console.log(likes);
+              await db.collection("post").doc(`${idButtonLike}`).update({like: likes});
+            }
+          } else {
+            likes.push(user.uid);
+            console.log(likes);
+            await db.collection("post").doc(`${idButtonLike}`).update({like: likes});
+          }          
+          loadPost(); 
+        })
+      })
+    }
+    
   const createPost = (data, user, idPost) => {
     let template = '';
     if(data.user===user.uid){
@@ -137,7 +186,8 @@ export const functionPost = () => {
           </div>
            <textarea class = "textAreaGray ${idPost}" cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
-            <img class="like likeDesktop" src="./images/like.png" alt="">
+            <img data-id="${idPost}" class="like likeDesktop" src="./images/like.png" alt="">
+            <p class='countLike'>${data.like.length}</p>
             <img data-id="${idPost}" class="delete deleteDesktop" src="./images/delete.png" type="button" alt="" />
           </div>
           </div>
@@ -154,19 +204,18 @@ export const functionPost = () => {
           <div class="recipe">
           </div>
           <div class="footerPost">
-            <img class="like" src="./images/like.png" alt="">
+            <img data-id="${idPost}" id="likeImage"class="like" src="./images/like.png" alt="">
+            <p class='countLike'>${data.like.length}</p>
           </div>
         </div>
       `
     }
-
     return template;
   }
-  
+
 searchInput.addEventListener('keyup', (e) => {
    let search = e.target.value;
    console.log(search);
  });
-//loadPost();
   return divElement;
 }
