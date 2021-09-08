@@ -58,7 +58,7 @@ export const functionPost = () => {
   const loadPost = async () => {
     // const db = firebase.firestore();
     const rootRef=firebase.firestore().collection('post');
-    const list = rootRef.orderBy("fecha","desc");
+    const list = rootRef.orderBy("fecha","asc");
     const list2 = await list.get();
     console.log(list2.docs);
     // const snapshot = await db.collection('post').get();
