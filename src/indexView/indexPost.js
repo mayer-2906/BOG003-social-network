@@ -16,9 +16,10 @@ export const functionPost = () => {
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
       .then(() => {
-        searchInput.value='';
+        
         /* eslint-disable */
         window.location.href = '#/initial';
+        //searchInput.value='';
       }).catch((error) => {
       });
   });
@@ -62,7 +63,7 @@ export const functionPost = () => {
             //editing();
             //deliting();
             //liking();
-            //searching();
+            searching();
           })
       }
     });
@@ -89,7 +90,7 @@ export const functionPost = () => {
       editing();
       deliting();
       liking();
-      searching();
+      //searching();
     }
   }
 
