@@ -299,6 +299,7 @@ html {
   color: var(--desktopFontColor);
   outline: none;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .textAreaGray {
@@ -321,6 +322,7 @@ html {
   margin-left: 10%;
   margin-top: 5px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 .countLike{
   position:absolute;
@@ -334,6 +336,7 @@ html {
   width: 20%;
   margin-top: 10px;
   margin-left: 40%;
+  cursor: pointer;
 }
 
 #errorMessage {
