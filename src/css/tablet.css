@@ -18,6 +18,7 @@
 }
 .like{
   width: 5%;
+  cursor: pointer;
 }
 .countLike{
   position:absolute;
@@ -28,6 +29,7 @@
 }
 .delete{
   width: 12%;
+  cursor: pointer;
 }
 .hello{
   font-size: 15px;

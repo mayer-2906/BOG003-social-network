@@ -176,6 +176,7 @@ font-weight: bold;
   margin-left: 10%;
   margin-top: 5px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 .countLike{
   position:absolute;
@@ -187,6 +188,7 @@ font-weight: bold;
 .delete{
   margin-top: 6%;
   width: 10%;
+  cursor: pointer;
 }
 .textAreaGray {
   font-size:20px;
