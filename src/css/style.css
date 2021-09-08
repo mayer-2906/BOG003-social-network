@@ -172,7 +172,7 @@ html {
   margin-left: 10px;
   border-radius: 5px;
   border: 1px solid var(--inputBorder);
-  background-image: url("./images/loupe.png");
+  background-image: url("../images/loupe.png");
   background-repeat: no-repeat;
   background-position-x: right;
   background-size: 15px;
@@ -224,7 +224,7 @@ html {
 
 .addPost {
   position: relative;
-  margin-top: 30%;
+  margin-top:20%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -233,7 +233,7 @@ html {
 
 .recipePost {
   width: 90%;
-  height: 50px;
+  height: 100px;
   border: 2px solid var(--borderButton);
   border-radius: 5px;
   font-size: 14px;
@@ -307,6 +307,16 @@ html {
   border-radius: 10px;
   border-color: var(--inputBorder);
   font-size:20px;
+}
+.idPost {
+  margin: auto;
+  width: 90%;
+  background-color: var(--inputBackground);
+  justify-content: center;
+  border-radius: 10px;
+  border-color: var(--inputBorder);
+  font-size:20px;
+
 }
 .footerPost {
   display: grid;

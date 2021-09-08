@@ -16,7 +16,12 @@ export const functionInitial = () => {
     signIn(email, password)
       .then(() => {
         cleanInitial();
-        window.location.href = '#/post';
+        const verified = firebase.auth().currentUser.emailVerified;
+        if (verified) {
+          window.location.href = '#/post';
+        } else {
+          document.querySelector('#messageRegisteredUser').innerHTML = '⚠️ Revise su bandeja de entrada y verifique su correo';
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
