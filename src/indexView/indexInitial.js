@@ -14,9 +14,11 @@ export const functionInitial = () => {
 
   const signInIndex = (email, password) => {
     signIn(email, password)
-      .then(() => {
+      .then((userCredential) => {
         cleanInitial();
-        const user = firebase.auth().currentUser();
+        const user = userCredential.user;
+        /* eslint-disable */
+        console.log(user.emailVerified);
         if (user.emailVerified) {
           window.location.href = '#/post';
         } else {

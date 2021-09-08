@@ -56,12 +56,12 @@ export const functionPost = () => {
 
 
   const loadPost = async () => {
-    const db = firebase.firestore();
+    // const db = firebase.firestore();
     const rootRef=firebase.firestore().collection('post');
     const list = rootRef.orderBy("fecha","desc");
     const list2 = await list.get();
     console.log(list2.docs);
-    const snapshot = await db.collection('post').get();
+    // const snapshot = await db.collection('post').get();
     await firebase.auth().onAuthStateChanged(user => {
       if(user){
          //db.collection('post')
@@ -82,24 +82,24 @@ export const functionPost = () => {
     });
   }
 
-  const ordenarPost = (datos) =>{
-    let postSort=[];
-    datos.forEach(post => {
-      const newPost={
-        fecha: post.data().fecha,
-        name: post.data().name,
-        recipe: post.data().recipe,
-        user: post.data().user,
-        like: post.data().like,
-        id: post.id,
-      }
-      postSort.push(newPost);
-      //console.log(post.data().fecha);
-    })
-    postSort.sort((a,b)=>b.fecha-a.fecha);
-    console.log(postSort);
-    return postSort;
-  }
+  // const ordenarPost = (datos) =>{
+  //   let postSort=[];
+  //   datos.forEach(post => {
+  //     const newPost={
+  //       fecha: post.data().fecha,
+  //       name: post.data().name,
+  //       recipe: post.data().recipe,
+  //       user: post.data().user,
+  //       like: post.data().like,
+  //       id: post.id,
+  //     }
+  //     postSort.push(newPost);
+  //     //console.log(post.data().fecha);
+  //   })
+  //   postSort.sort((a,b)=>b.fecha-a.fecha);
+  //   console.log(postSort);
+  //   return postSort;
+  // }
 
   const showPost = (data, user) => {
     if(data.length){
