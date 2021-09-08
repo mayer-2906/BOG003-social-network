@@ -213,6 +213,7 @@ html {
   position: relative;
   margin-top: -20px;
   padding-top: 0;
+  cursor: pointer;
 }
 
 .containerMain {
@@ -330,10 +331,20 @@ html {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.countLike{
+  position:relative;
+  
+  margin-right: 50%;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+
 .delete {
-  width: 30%;
+  width: 20%;
   margin-top: 10px;
-  margin-left: 40%;
+  margin-left: 80%;
 }
 
 #errorMessage {

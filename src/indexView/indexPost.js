@@ -11,6 +11,7 @@ export const functionPost = () => {
   document.addEventListener('DOMContentLoaded', async () => {
     /* eslint-disable */;
     loadPost();
+    
   });
 
   buttonSignOut.addEventListener('click', () => {
@@ -60,8 +61,10 @@ export const functionPost = () => {
             showPost(snapshot.docs, user)
             editing();
             deliting();
+            liking();
           })
       }
+      
     });
   }
 
@@ -79,7 +82,7 @@ export const functionPost = () => {
       divcontainerPost.innerHTML = addHtml;
       divElement.querySelector('#containerPost').innerHTML='';
       divElement.querySelector('#containerPost').appendChild(divcontainerPost);
-      liking();
+      
     }
   }
 
@@ -99,11 +102,9 @@ export const functionPost = () => {
           console.log(e.target.id);
           console.log(editedPost);
           const db = firebase.firestore();
-          const fecha = new Date();
-          const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost, fecha: date,});
+          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost,});
           enableEdit = true;
-          //loadPost();
+          loadPost();
         }
       })
     })}
@@ -136,12 +137,12 @@ export const functionPost = () => {
     )})}
 
     const liking = () => {
-      const likesButtons = divElement.querySelectorAll(".likeDesktop");
+      const likesButtons = divElement.querySelectorAll("#likeImage");
       likesButtons.forEach(likeButton => {
         likeButton.addEventListener('click',async (e)=>{
           const db = firebase.firestore();
           const idButtonLike = e.target.dataset.id;
-          // console.log(idButtonDelete);
+          console.log(idButtonLike);
           const postLike = await db.collection("post").doc(idButtonLike).get();
           console.log(postLike.data());
           const likes =postLike.data().like;
@@ -167,7 +168,7 @@ export const functionPost = () => {
             console.log(likes);
             await db.collection("post").doc(`${idButtonLike}`).update({like: likes});
           }          
-          //loadPost(); 
+          loadPost(); 
         })
       })
     }
@@ -183,9 +184,9 @@ export const functionPost = () => {
             <p class="datePost datePostDesktop">${data.fecha}</p>
             <input id= "${idPost}" class="inputEdit inputEditDesktop" type="button" value="Editar"/>
           </div>
-           <textarea class = "textAreaGray ${idPost}" cols="10" rows="5" disabled>${data.recipe}</textarea>
+           <textarea class="textAreaGray ${idPost}" cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
-            <img class="like likeDesktop" src="./images/like.png" alt="">
+            <img data-id="${idPost}" class="like likeDesktop" src="./images/like.png" alt="">
             <p class='countLike'>${data.like.length}</p>
             <img data-id="${idPost}" class="delete deleteDesktop" src="./images/delete.png" type="button" alt="" />
           </div>
@@ -199,11 +200,11 @@ export const functionPost = () => {
             <p class="postName postNameDesktop">${data.name}</p>
             <p class="datePost datePostDesktop">${data.fecha}</p>
           </div>
-           <textarea class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
+           <textarea class="textAreaGray ${idPost}" cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="recipe">
           </div>
           <div class="footerPost">
-            <img class="like" src="./images/like.png" alt="">
+            <img data-id="${idPost}" id="likeImage" class="like" src="./images/like.png" alt="">
             <p class='countLike'>${data.like.length}</p>
           </div>
         </div>
