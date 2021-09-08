@@ -14,16 +14,13 @@ export const functionInitial = () => {
 
   const signInIndex = (email, password) => {
     signIn(email, password)
-      .then((userCredential) => {
+      .then(() => {
         cleanInitial();
-        const user = userCredential.user;
-        /* eslint-disable */
-        console.log(user.emailVerified);
-        if (user.emailVerified) {
+        const verified = firebase.auth().currentUser.emailVerified;
+        if (verified) {
           window.location.href = '#/post';
         } else {
-          /* eslint-disable */
-          alert('Debe verificar su email por correo');
+          document.querySelector('#messageRegisteredUser').innerHTML = '⚠ Revise su bandeja de entrada y verifique su correo';
         }
       })
       .catch((error) => {

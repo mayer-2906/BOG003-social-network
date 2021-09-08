@@ -9,21 +9,16 @@ export const functionPost = () => {
   const searchInput = divElement.querySelector('#searchInput');
   let enableEdit = true;
   document.addEventListener('DOMContentLoaded', async () => {
-    /* eslint-disable */
-    // console.log('cargo indexPost');
+    /* eslint-disable */;
     loadPost();
-    // editing();
-    // deliting();
   });
 
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
       .then(() => {
         /* eslint-disable */
-        // console.log('sign out');
         window.location.href = '#/initial';
       }).catch((error) => {
-      //console.log('sign out');
       });
   });
 
@@ -32,21 +27,20 @@ export const functionPost = () => {
     divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
-    const date = `${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()}`;
+    //const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
     // let userLogin='';
     await db.collection("post").add({
       name: user.displayName,
       recipe: recipe,
-      fecha: date,
+      fecha: fecha,
       user: user.uid,
-      like: [], 
+      like: [],
       })
       .then(() => {
           loadPost();
           divElement.querySelector('#recipePostear').value='';
-          //console.log("Document written with ID: ", docRef.id);
       })
       .catch(() => {
           alert('Lo sentimos no pudimos agregar tu post, intenta de nuevo');
@@ -54,30 +48,20 @@ export const functionPost = () => {
       });
     });
 
-
-  const loadPost = async () => {
-    // const db = firebase.firestore();
-    const rootRef=firebase.firestore().collection('post');
-    const list = rootRef.orderBy("fecha","desc");
-    const list2 = await list.get();
-    console.log(list2.docs);
-    // const snapshot = await db.collection('post').get();
-    await firebase.auth().onAuthStateChanged(user => {
+  const loadPost = () => {
+    const db = firebase.firestore();
+    firebase.auth().onAuthStateChanged(user => {
       if(user){
-         //db.collection('post')
-         // .get()
-          //.then((snapshot) => {
-            
+        db.collection('post').orderBy('fecha', 'desc')
+          .get()
+          .then((snapshot) => {
             const helloUser = divElement.querySelector('#helloUser');
             helloUser.innerHTML = `Hola ${user.displayName}`; 
-            //const postOrdenados=snapshot.docs.sort((a,b)=> a.data().fecha-b.data().fecha);
-            //console.log(postOrdenados);
-            //const postOrdenados=ordenarPost(snapshot.docs);
-            showPost(list2.docs, user)
+            showPost(snapshot.docs, user)
             editing();
             deliting();
             liking();
-         // })
+          })
       }
     });
   }
@@ -106,7 +90,9 @@ export const functionPost = () => {
       let addHtml = '';
       data.forEach(post => {
         const postData = post.data();
-        const idPost = post.id
+        const date = new Date(postData.fecha.seconds*1000)
+        postData.fecha = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        const idPost = post.id;
         addHtml += createPost(postData, user, idPost);
         //addHtml += createPost(post, user);
       });
@@ -114,11 +100,13 @@ export const functionPost = () => {
       divcontainerPost.innerHTML = addHtml;
       divElement.querySelector('#containerPost').innerHTML='';
       divElement.querySelector('#containerPost').appendChild(divcontainerPost);
+      liking();
     }
   }
+
   const editing = () => {
     const inputEditar = divElement.querySelectorAll(".inputEditDesktop");
-    console.log('esto son los inputs ', inputEditar);
+    //console.log('esto son los inputs ', inputEditar);
     inputEditar.forEach(editButton => {
       editButton.addEventListener('click',async (e)=>{
         if (enableEdit) {
@@ -134,31 +122,42 @@ export const functionPost = () => {
           const db = firebase.firestore();
           const fecha = new Date();
           const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost, fecha: date,});
+          await db.collection("post").doc(`${e.target.id}`).update({recipe: editedPost, fecha: fecha,});
           enableEdit = true;
           loadPost();
         }
-        
       })
     })}
 
+    const confirmationDelete = () => {
+      let delConfirm = confirm("¿Seguro quieres eliminar el post?");
+        if( delConfirm == true ) {
+          return true;
+      } else {
+          return false;
+              }
+      }
+
     const deliting = () => {
       const deleteButtons = divElement.querySelectorAll(".deleteDesktop");
-      // console.log('esto son los delete ', deleteButtons);
-        deleteButtons.forEach(deleteButton => {
-        deleteButton.addEventListener('click',async (e)=>{
-          const db = firebase.firestore();
-          const idButtonDelete = e.target.dataset.id;
-          // console.log(idButtonDelete);
-          await db.collection("post").doc(idButtonDelete).delete();
-          loadPost(); 
-        })
-      })
+      //console.log('esto son los delete ', deleteButtons);
+      deleteButtons.forEach(deleteButton => {
+      deleteButton.addEventListener('click',async (e)=>{
+      //alert()para confirmar eliminar el post
+      if (confirmationDelete()=== true){
+      const db = firebase.firestore();
+      const idButtonDelete = e.target.dataset.id;
+      console.log(idButtonDelete);
+      await db.collection("post").doc(idButtonDelete).delete();
+      loadPost();
     }
+      else {
+      loadPost(); 
+    }}
+    )})}
 
     const liking = () => {
-      const likesButtons = divElement.querySelectorAll(".likeDesktop");
-      // console.log('esto son los delete ', deleteButtons);
+      const likesButtons = divElement.querySelectorAll("#likeImage");
       likesButtons.forEach(likeButton => {
         likeButton.addEventListener('click',async (e)=>{
           const db = firebase.firestore();
@@ -193,10 +192,8 @@ export const functionPost = () => {
         })
       })
     }
-        
     
-
-  const createPost = (data, user,idPost) => {
+  const createPost = (data, user, idPost) => {
     let template = '';
     if(data.user===user.uid){
       template = `
@@ -207,9 +204,10 @@ export const functionPost = () => {
             <p class="datePost datePostDesktop">${data.fecha}</p>
             <input id= "${idPost}" class="inputEdit inputEditDesktop" type="button" value="Editar"/>
           </div>
-           <textarea class = "${idPost}"  class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
+           <textarea class = "textAreaGray ${idPost}" cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
             <img data-id="${idPost}" class="like likeDesktop" src="./images/like.png" alt="">
+            <p class='countLike'>${data.like.length}</p>
             <img data-id="${idPost}" class="delete deleteDesktop" src="./images/delete.png" type="button" alt="" />
           </div>
           </div>
@@ -226,19 +224,18 @@ export const functionPost = () => {
           <div class="recipe">
           </div>
           <div class="footerPost">
-            <img data-id="${idPost}" class="like likeDesktop" src="./images/like.png" alt="">
+            <img data-id="${idPost}" id="likeImage"class="like" src="./images/like.png" alt="">
+            <p class='countLike'>${data.like.length}</p>
           </div>
         </div>
       `
     }
-
     return template;
   }
-  
+
 searchInput.addEventListener('keyup', (e) => {
    let search = e.target.value;
    console.log(search);
  });
-//loadPost();
   return divElement;
 }

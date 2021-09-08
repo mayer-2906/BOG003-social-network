@@ -1,7 +1,8 @@
-import { register, emailVerification } from '../functionFirebase.js';
+import { register } from '../functionFirebase.js';
 import { newAccount } from '../view/newAccount.js';
 
 const cleanRegister = () => {
+  document.querySelector('#nameUser').value = '';
   document.querySelector('#email').value = '';
   document.querySelector('#confirmEmail').value = '';
   document.querySelector('#password').value = '';
@@ -14,7 +15,7 @@ export const functionNewAccount = () => {
   const inputLogin = divElement.querySelector('#signIn');
 
   const dataRegister = async () => {
-    const nameUser = divElement.querySelector('#nameUser').value;
+    const nameUser = document.querySelector('#nameUser').value;
     const email = document.getElementById('email').value;
     const confirmEmail = document.getElementById('confirmEmail').value;
     const password = document.getElementById('password').value;
@@ -27,17 +28,15 @@ export const functionNewAccount = () => {
         await register(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          // console.log(user)
           user.updateProfile({
             displayName: nameUser,
           })
-          emailVerification();
-          //console.log('estoy en newAcconunt en then line 26: ', nameUser);
-          // var user = userCredential.user;
-          // console.log(user.email);
           cleanRegister();
           window.location.href = '#/initial';
-          // ...
+          const config = {
+            url: 'https://mayer-2906.github.io/BOG003-social-network/src/index.html#/initial'
+          }
+          userCredential.user.sendEmailVerification(config)
         })
         .catch((error) => {
           /* eslint-disable */
