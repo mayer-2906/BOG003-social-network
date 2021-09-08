@@ -12,8 +12,8 @@ export const functionPost = () => {
     /* eslint-disable */
     // console.log('cargo indexPost');
     loadPost();
-    editing();
-    deliting();
+    // editing();
+    // deliting();
   });
 
   buttonSignOut.addEventListener('click', () => {
@@ -32,7 +32,7 @@ export const functionPost = () => {
     divElement.querySelector('#containerPost').innerHTML = '';
     const recipe = divElement.querySelector('#recipePostear').value;
     const fecha = new Date();
-    const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+    const date = `${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()}`;
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
     // let userLogin='';
@@ -41,6 +41,7 @@ export const functionPost = () => {
       recipe: recipe,
       fecha: date,
       user: user.uid,
+      like: [], 
       })
       .then(() => {
           loadPost();
@@ -54,21 +55,50 @@ export const functionPost = () => {
     });
 
 
-  const loadPost = () => {
+  const loadPost = async () => {
     const db = firebase.firestore();
-    firebase.auth().onAuthStateChanged(user => {
+    const rootRef=firebase.firestore().collection('post');
+    const list = rootRef.orderBy("fecha","desc");
+    const list2 = await list.get();
+    console.log(list2.docs);
+    const snapshot = await db.collection('post').get();
+    await firebase.auth().onAuthStateChanged(user => {
       if(user){
-        db.collection('post')
-          .get()
-          .then((snapshot) => {
+         //db.collection('post')
+         // .get()
+          //.then((snapshot) => {
+            
             const helloUser = divElement.querySelector('#helloUser');
             helloUser.innerHTML = `Hola ${user.displayName}`; 
-            showPost(snapshot.docs, user)
-            //editing();
-            //deliting();
-          })
+            //const postOrdenados=snapshot.docs.sort((a,b)=> a.data().fecha-b.data().fecha);
+            //console.log(postOrdenados);
+            //const postOrdenados=ordenarPost(snapshot.docs);
+            showPost(list2.docs, user)
+            editing();
+            deliting();
+            liking();
+         // })
       }
     });
+  }
+
+  const ordenarPost = (datos) =>{
+    let postSort=[];
+    datos.forEach(post => {
+      const newPost={
+        fecha: post.data().fecha,
+        name: post.data().name,
+        recipe: post.data().recipe,
+        user: post.data().user,
+        like: post.data().like,
+        id: post.id,
+      }
+      postSort.push(newPost);
+      //console.log(post.data().fecha);
+    })
+    postSort.sort((a,b)=>b.fecha-a.fecha);
+    console.log(postSort);
+    return postSort;
   }
 
   const showPost = (data, user) => {
@@ -78,6 +108,7 @@ export const functionPost = () => {
         const postData = post.data();
         const idPost = post.id
         addHtml += createPost(postData, user, idPost);
+        //addHtml += createPost(post, user);
       });
       const divcontainerPost = document.createElement('div');
       divcontainerPost.innerHTML = addHtml;
@@ -111,22 +142,61 @@ export const functionPost = () => {
       })
     })}
 
-     const deliting = () => {
+    const deliting = () => {
       const deleteButtons = divElement.querySelectorAll(".deleteDesktop");
-      console.log('esto son los delete ', deleteButtons);
-      deleteButtons.forEach(deleteButton => {
-      deleteButton.addEventListener('click',async (e)=>{
-      const db = firebase.firestore();
-      const idButtonDelete = e.target.dataset.id;
-      console.log(idButtonDelete);
-      await db.collection("post").doc(idButtonDelete).delete();
-      loadPost(); 
+      // console.log('esto son los delete ', deleteButtons);
+        deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click',async (e)=>{
+          const db = firebase.firestore();
+          const idButtonDelete = e.target.dataset.id;
+          // console.log(idButtonDelete);
+          await db.collection("post").doc(idButtonDelete).delete();
+          loadPost(); 
+        })
+      })
     }
-      
-     )})}
+
+    const liking = () => {
+      const likesButtons = divElement.querySelectorAll(".likeDesktop");
+      // console.log('esto son los delete ', deleteButtons);
+      likesButtons.forEach(likeButton => {
+        likeButton.addEventListener('click',async (e)=>{
+          const db = firebase.firestore();
+          const idButtonLike = e.target.dataset.id;
+          // console.log(idButtonDelete);
+          const postLike = await db.collection("post").doc(idButtonLike).get();
+          console.log(postLike.data());
+          const likes =postLike.data().like;
+          const user = firebase.auth().currentUser;
+          if(likes.length>0){
+            if(likes.includes(user.uid)){
+              console.log("ya le dio like");
+              let newlikes=[];
+              likes.forEach(item=>{
+                if(item!==user.uid){
+                  newlikes.push(item);
+                }
+              })
+              await db.collection("post").doc(`${idButtonLike}`).update({like: newlikes});
+            } else {
+              //const user = firebase.auth().currentUser;
+              likes.push(user.uid);
+              console.log(likes);
+              await db.collection("post").doc(`${idButtonLike}`).update({like: likes});
+            }
+          } else {
+            likes.push(user.uid);
+            console.log(likes);
+            await db.collection("post").doc(`${idButtonLike}`).update({like: likes});
+          }          
+          loadPost(); 
+        })
+      })
+    }
+        
     
 
-  const createPost = (data, user, idPost) => {
+  const createPost = (data, user,idPost) => {
     let template = '';
     if(data.user===user.uid){
       template = `
@@ -139,7 +209,7 @@ export const functionPost = () => {
           </div>
            <textarea class = "${idPost}"  class=textAreaGray cols="10" rows="5" disabled>${data.recipe}</textarea>
           <div class="footerPost">
-            <img class="like likeDesktop" src="./images/like.png" alt="">
+            <img data-id="${idPost}" class="like likeDesktop" src="./images/like.png" alt="">
             <img data-id="${idPost}" class="delete deleteDesktop" src="./images/delete.png" type="button" alt="" />
           </div>
           </div>
@@ -156,7 +226,7 @@ export const functionPost = () => {
           <div class="recipe">
           </div>
           <div class="footerPost">
-            <img class="like" src="./images/like.png" alt="">
+            <img data-id="${idPost}" class="like likeDesktop" src="./images/like.png" alt="">
           </div>
         </div>
       `

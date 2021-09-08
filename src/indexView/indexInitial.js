@@ -16,7 +16,13 @@ export const functionInitial = () => {
     signIn(email, password)
       .then(() => {
         cleanInitial();
-        window.location.href = '#/post';
+        const user = firebase.auth().currentUser();
+        if (user.emailVerified) {
+          window.location.href = '#/post';
+        } else {
+          /* eslint-disable */
+          alert('Debe verificar su email por correo');
+        }
       })
       .catch((error) => {
         const errorCode = error.code;

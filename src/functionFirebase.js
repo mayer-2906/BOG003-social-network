@@ -11,3 +11,9 @@ export const logInWithGoogle = () => {
 };
 
 export const signOutDelicious = () => firebase.auth().signOut();
+
+const config = {
+  url: 'https://camilaforer.github.io/BOG003-social-network/src/#/initial'
+};
+
+export const emailVerification = () => firebase.auth().currentUser.sendEmailVerification(config);

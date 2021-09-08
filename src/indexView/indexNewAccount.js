@@ -1,4 +1,4 @@
-import { register } from '../functionFirebase.js';
+import { register, emailVerification } from '../functionFirebase.js';
 import { newAccount } from '../view/newAccount.js';
 
 const cleanRegister = () => {
@@ -14,7 +14,7 @@ export const functionNewAccount = () => {
   const inputLogin = divElement.querySelector('#signIn');
 
   const dataRegister = async () => {
-    const nameUser = document.querySelector('#nameUser');
+    const nameUser = divElement.querySelector('#nameUser').value;
     const email = document.getElementById('email').value;
     const confirmEmail = document.getElementById('confirmEmail').value;
     const password = document.getElementById('password').value;
@@ -26,11 +26,13 @@ export const functionNewAccount = () => {
       if (email === confirmEmail && password === confirmPassword) {
         await register(email, password)
         .then((userCredential) => {
-          const user = firebase.auth().currentUser;
+          const user = userCredential.user;
+          // console.log(user)
           user.updateProfile({
             displayName: nameUser,
           })
-          console.log('estoy en newAcconunt en then line 26: ', user.displayName)
+          emailVerification();
+          //console.log('estoy en newAcconunt en then line 26: ', nameUser);
           // var user = userCredential.user;
           // console.log(user.email);
           cleanRegister();
