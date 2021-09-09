@@ -18,6 +18,10 @@
 }
 .like{
   width: 5%;
+<<<<<<< HEAD
+=======
+  cursor: pointer;
+>>>>>>> 551c6172896a4f55fc728dce22768b6a18bcee45
 }
 .countLike{
   position:absolute;
@@ -28,6 +32,10 @@
 }
 .delete{
   width: 12%;
+<<<<<<< HEAD
+=======
+  cursor: pointer;
+>>>>>>> 551c6172896a4f55fc728dce22768b6a18bcee45
 }
 .hello{
   font-size: 15px;

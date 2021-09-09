@@ -16,6 +16,7 @@ export const functionPost = () => {
   buttonSignOut.addEventListener('click', () => {
     signOutDelicious()
       .then(() => {
+        searchInput.value='';
         /* eslint-disable */
         window.location.href = '#/initial';
       }).catch((error) => {
@@ -58,13 +59,15 @@ export const functionPost = () => {
             const helloUser = divElement.querySelector('#helloUser');
             helloUser.innerHTML = `Hola ${user.displayName}`; 
             showPost(snapshot.docs, user)
-            editing();
-            deliting();
-            liking();
+            //editing();
+            //deliting();
+            //liking();
+            //searching();
           })
       }
     });
   }
+
 
   const showPost = (data, user) => {
     if(data.length){
@@ -75,12 +78,17 @@ export const functionPost = () => {
         postData.fecha = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
         const idPost = post.id;
         addHtml += createPost(postData, user, idPost);
+        //addHtml += createPost(post, user);
       });
-      const divcontainerPost = document.createElement('div');
-      divcontainerPost.innerHTML = addHtml;
+      // const divcontainerPost = document.createElement('div');
+      //divcontainerPost.innerHTML = addHtml;
       divElement.querySelector('#containerPost').innerHTML='';
-      divElement.querySelector('#containerPost').appendChild(divcontainerPost);
+      //divElement.querySelector('#containerPost').appendChild(divcontainerPost);
+      divElement.querySelector('#containerPost').innerHTML=addHtml;
+      editing();
+      deliting();
       liking();
+      searching();
     }
   }
 
@@ -97,8 +105,8 @@ export const functionPost = () => {
         }
         else {
           const editedPost = divElement.querySelector(`.${e.target.id}`).value;
-          console.log(e.target.id);
-          console.log(editedPost);
+          //console.log(e.target.id);
+          //console.log(editedPost);
           const db = firebase.firestore();
           const fecha = new Date();
           const date = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
@@ -107,7 +115,8 @@ export const functionPost = () => {
           loadPost();
         }
       })
-    })}
+    })
+  }
 
     const confirmationDelete = () => {
       let delConfirm = confirm("¿Seguro quieres eliminar el post?");
@@ -177,7 +186,7 @@ export const functionPost = () => {
     let template = '';
     if(data.user===user.uid){
       template = `
-      <div class= "userContainerPost">
+      <div class= "containerPost">
       <div class= "userContainerPost">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
@@ -195,7 +204,7 @@ export const functionPost = () => {
       `;
     } else {
       template = `
-        <div class= "containerPosts">
+        <div class= "containerPost">
           <div class="headerPost">
             <p class="postName postNameDesktop">${data.name}</p>
             <p class="datePost datePostDesktop">${data.fecha}</p>
@@ -212,10 +221,26 @@ export const functionPost = () => {
     }
     return template;
   }
-
-searchInput.addEventListener('keyup', (e) => {
+const searching = () => {
+  searchInput.addEventListener('keyup', async (e) => {
    let search = e.target.value;
-   console.log(search);
- });
+   //console.log(search);
+   const postBuscados = await firebase.firestore().collection('post').orderBy('fecha', 'desc').get();
+   //console.log(postBuscados.docs);
+   const postsShearch =[];
+   postBuscados.docs.forEach(post=>{
+     if(post.data().recipe.toLowerCase().includes(search.toLowerCase())){
+       postsShearch.push(post);
+       //console.log(post.data());
+     }
+    
+   })
+   const user=firebase.auth().currentUser;
+   //console.log(user.displayName);
+   if(postsShearch.length>0){
+    showPost(postsShearch, user);
+   }   
+   });
+  }
   return divElement;
 }
